@@ -1,0 +1,29 @@
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+<script src="../JS/shortcuts.js"></script>
+<script src="../JS/js.js"></script>
+
+<body id="bod" style='background-color: #FFF;'>
+	<div align='center'>
+		
+		<div style='height: 10%;'>
+			<input type="button" id="Bpred" style="display:none" value="<" onclick="predClue()">
+			<input type="button" id="Bnumero" style="display:none" value="X" onclick="hints()">
+			<input type="button" id="Bselect" style="display:none" value=">>>" onclick="addSelected()">
+			<input type="text" id="textB" style='width: 300px; '>
+			<input type="button" id="requetes" value="Chercher" onclick="requete()">
+			<input type="button" id="Bnext" style="display:none" value=">" onclick="nextClue()">
+		</div>
+		<div align='center'>
+			<div id="divA" style="margin: 30px auto; width:60%; height: 80%; overflow-y: auto;" align='left'></div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	console.info (document.cookie);
+</script>
+</html>
+

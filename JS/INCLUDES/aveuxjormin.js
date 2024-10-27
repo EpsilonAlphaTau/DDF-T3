@@ -1,0 +1,1 @@
+readJS('C','','',"Le cuisinier avoue rapidement. Né dans le Péléma, il a voyagé jusqu'à Luciandath, comme d'autres auparavant, car la tour est au centre de l'Oslande, beaucoup de savoir s'y trouve et beaucoup de choses s'y décident. <br/><i><br/>Utilisez 'aveux' pour qu'il parle de différents sujets<br/></i>",'Aveux de Jorda',112);

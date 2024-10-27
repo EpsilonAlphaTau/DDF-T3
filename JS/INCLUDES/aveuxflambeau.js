@@ -1,0 +1,1 @@
+readJS('C','','',"Oui, c'est nous qui nous sommes fait surprendre par Bonavar : nous avons allumé nos flambeaux trop près de Luciandath. Seulement, on ne voit rien la nuit dans cette fichue Branchédrale !",'Aveux de Jorda',121);

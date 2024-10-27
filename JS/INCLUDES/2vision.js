@@ -1,0 +1,1 @@
+readJS('C','2 116','',"Des humains s'entassent dans un bateau. Ils l'ignorent, mais ils partent commettre des crimes terribles. Arriveront-ils à bon port ? A la proue, une lumière illumine l'Océan.",'Lexique',57);
