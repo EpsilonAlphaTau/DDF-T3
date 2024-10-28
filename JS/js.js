@@ -20,12 +20,6 @@ function requete(){
 	var recherche = getFileNameFromText(recherche);
 	//console.info(">>> " + recherche);
 	if (recherche === "") {
-		var cook = getCookie('ddfpwd');
-		if (cook !== undefined)
-		{
-			enterPassword("!" + recherche);
-			return;
-		}
 		
 		if (window.getSelection) {
         	var text = getFileNameFromText(clearTextFromShorts(window.getSelection().toString()));

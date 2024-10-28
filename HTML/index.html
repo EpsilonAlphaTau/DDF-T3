@@ -28,7 +28,13 @@
 </body>
 
 <script type="text/javascript">
-	console.info (document.cookie);
+	var cook = getCookie('ddfpwd');
+	if (cook !== undefined)
+	{
+		enterPassword("!" + recherche);
+		return;
+	}
+		
 </script>
 </html>
 
