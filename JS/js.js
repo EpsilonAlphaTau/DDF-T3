@@ -20,12 +20,12 @@ function requete(){
 	var recherche = getFileNameFromText(recherche);
 	console.info(">>> " + recherche);
 	if (recherche === "") {
-		/*var rt = navigator.clipboard.readText();
-		if (rt.charAt(0) === '!')
+		var cook = getCookie('ddfpwd');
+		if (cook !== "undefined")
 		{
-			enterPassword(navigator.clipboard.readText());
+			enterPassword("!" + recherche);
 			return;
-		}*/
+		}
 
 		if (window.getSelection) {
         	var text = getFileNameFromText(window.getSelection().toString());
@@ -403,7 +403,10 @@ function readJS(type, date, image, texte, medium, numero, recherche){
 		found[numero] = true;
 		document.getElementById("Bnumero").value = numero;
 		if (nouveau)
+		{
+			GetCode();
 			document.getElementById("Bnumero").style.backgroundColor = 'lightgreen';
+		}	
 		else
 			document.getElementById("Bnumero").style.backgroundColor = 'buttonface';
 		foundPredNum = numero;
@@ -525,7 +528,6 @@ function GetCode() {
 	return code;
 }
 
-console.info("COOK" + getCookie('ddfpwd'));
 
 function getCookie(c_name) {
     var i, x, y, ARRcookies = document.cookie.split(";");
