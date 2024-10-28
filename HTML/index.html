@@ -30,11 +30,17 @@
 
 <script type="text/javascript">
 	var cook = getCookie('ddfpwd');
-	//console.info("COOK=" + cook);
 	if (cook !== undefined)
 	{
 		enterPassword("!" + cook);
 	}
+	var input = document.getElementById('textB');
+	input.addEventListener("keypress", function(event) {
+	  	if (event.key === "Enter") {
+	    	event.preventDefault();
+	    	document.getElementById("requetes").click();
+	  	}
+	});
 		
 </script>
 </html>

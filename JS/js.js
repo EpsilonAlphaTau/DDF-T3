@@ -425,8 +425,6 @@ function readJS(type, date, image, texte, medium, numero, recherche){
 		isInInfo = false;
 		fileClueIndice++;
 		fileClue[fileClueIndice] = numero;
-		console.info("ind" + fileClueIndice);
-		console.log(fileClue);
 		currentClue = numero;
 	}/* else {
 		document.getElementById("Bnumero").value = "X";
@@ -477,8 +475,6 @@ var fileClue = [];
 fileClue[0] = 0;
 var fileClueIndice = 0;
 function retour(){
-	console.info("ind" + fileClueIndice);
-	console.log(fileClue);
 	if (fileClueIndice === 0) return;
 	fileClueIndice-=2;
 	shortcut(fileClue[fileClueIndice]);
