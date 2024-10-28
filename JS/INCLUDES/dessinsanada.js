@@ -1,1 +1,1 @@
-readJS('I','','sanada.webp',"Mon amie Sanada Veilletard. J'imagine qu'elle me remplacera, s'il m'arrive malheur...",'Lexique',-1);
+readJS('I','','sanada.webp',"<i>Mon amie Sanada Veilletard. J'imagine qu'elle me remplacera, s'il m'arrive malheur...</i>",'Lexique de Bonavar',132, 'Sanada Lexique');

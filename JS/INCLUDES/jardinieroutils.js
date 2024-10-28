@@ -1,1 +1,1 @@
-readJS('C','','',"Les outils de jardinage doivent se trouver sur le toit : il n'y a rien ici pour travailler la terre... C'est logique : il ne va pas les monter tous les jours !",'Chambre du jardinier',99);
+readJS('C','','',"Les outils de jardinage doivent se trouver sur le toit : il n'y a rien ici pour travailler la terre... C'est logique : il ne va pas les monter tous les jours !",'Chambre du jardinier',173, 'outils jardinier');

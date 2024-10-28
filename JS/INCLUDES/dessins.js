@@ -1,1 +1,1 @@
-readJS('C','','',"Parmi les oeuvres que Bonavar laisse derrière lui, il y a une représentation de Luciandath, quelques dessins qui semblent représenter des champs enneigés, et d'autres plus étranges.",'',14);
+readJS('C','','',"Parmi les oeuvres que Bonavar laisse derrière lui, il y a une représentation de Luciandath, quelques dessins qui semblent représenter des champs enneigés, et d'autres plus étranges.",'',27, 'dessins');

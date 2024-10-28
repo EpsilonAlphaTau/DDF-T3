@@ -1,1 +1,1 @@
-readJS('I','','',"L'armoire est vide : à mon avis, il s'est enfui.",'Chambre du jardinier',-1);
+readJS('I','','',"L'armoire est vide : à mon avis, il s'est enfui.",'Chambre du jardinier',174, 'armoire jardinier');

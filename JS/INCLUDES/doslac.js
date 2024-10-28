@@ -1,1 +1,1 @@
-readJS('C','','fonce.jpg',"Quelle horreur ! Cela donne la chair de poule. Heureusement, on n'y voit rien ici...",'Lexique',76);
+readJS('C','','fonce.jpg',"Quelle horreur ! Cela donne la chair de poule. Heureusement, on n'y voit rien ici...",'Lexique de Bonavar',138, 'lac dos');

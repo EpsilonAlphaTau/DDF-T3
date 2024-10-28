@@ -1,1 +1,1 @@
-readJS('I','1 1','',"Presque tout le monde porte une robe, ici...",'Chambre de Bonavar',-1);
+readJS('I','1 1','',"Presque tout le monde porte une robe, ici...",'Chambre de Bonavar',92, 'robes Bonavar');

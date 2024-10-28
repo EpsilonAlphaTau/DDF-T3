@@ -1,1 +1,1 @@
-readJS('C','','',"Nous n'avons tué personne. Seul Tanatien a essayé de tuer son ami, mais finalement, le sort s'est retourné contre lui, et je pense qu'il s'en est trouvé soulagé...",'Aveux de Jorda',119);
+readJS('C','','',"<i>Nous n'avons tué personne. Seul Tanatien a essayé de tuer son ami, mais finalement, le sort s'est retourné contre lui, et je pense qu'il s'en est trouvé soulagé...</i>",'Aveux de Jorda',208, 'aveux meurtre');

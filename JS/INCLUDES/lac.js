@@ -1,1 +1,1 @@
-readJS('C','','lac.jpg',"Un dessin de lac. Je ne le connais pas.",'Lexique',75);
+readJS('C','','lac.jpg',"Un dessin de lac. Je ne le connais pas.",'Lexique de Bonavar',137, 'lac');

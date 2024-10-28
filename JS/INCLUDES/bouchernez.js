@@ -1,1 +1,1 @@
-readJS('I','','',"Ca sent très mauvais quand même !",'Moi',-1);
+readJS('I','','',"Ca sent très mauvais quand même !",'Moi',190, 'boucher le nez');

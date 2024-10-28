@@ -1,1 +1,1 @@
-readJS('C','','datura.jpg',"",'Chambre de Bonavar',20);
+readJS('C','','datura.jpg',"",'Chambre de Bonavar',37, 'dessin 9');

@@ -1,6 +1,56 @@
 
 var encrypter;
 var debug = false;
+
+function enterPassword(recherche){
+	GetDecode(recherche.substring(1));
+	predClue();
+	startGame() ;
+	document.getElementById("textB").value = "";
+}
+
+function requete(){
+	var recherche = document.getElementById("textB").value;
+	console.info("<<< " + recherche);
+
+	if (recherche.substring(0,1) === "!"){
+		enterPassword(recherche);
+		return;
+	}
+	var recherche = getFileNameFromText(recherche);
+	console.info(">>> " + recherche);
+	if (recherche === "") {
+		/*var rt = navigator.clipboard.readText();
+		if (rt.charAt(0) === '!')
+		{
+			enterPassword(navigator.clipboard.readText());
+			return;
+		}*/
+
+		if (window.getSelection) {
+        	var text = getFileNameFromText(window.getSelection().toString());
+        	if (text !== "") {
+        		includeScript(text);
+        		document.getElementById("textB").value = "";
+        		return;
+        	}
+        }
+       	startGame();
+		shortcut(0);
+		document.getElementById("textB").value = "";
+		return;
+	}
+	
+	console.info(doEncCheat(recherche));
+	if (recherche === doDecCheat("U2FsdGVkX19wKQnGwvRJYeY712DsrV8p767JWJsqe2MvNe56f/9UBoVAcBm/WdjT")) 
+	{ window.location = doDecCheat("U2FsdGVkX1/NlOv0aJbNsHJFUTPCEtHhkZWl9ewxHnpMh3FXsB0Gw5SLJJzBaDCv"); }
+	else if (recherche === doDecCheat("")) 
+	{ window.location = doDecCheat("U2FsdGVkX19wH480savj7PZWBnPfJvj58B0e3l9+G6c="); }
+	else includeScript(recherche);
+	document.getElementById("textB").value = "";
+}
+
+
 function doEnc(item) {
 	var encrypted = CryptoJS.AES.encrypt(item, encrypter);
 	return encrypted.toString();
@@ -256,49 +306,29 @@ function getFileNameFromText(text){
 	return split.join('');
 }
 function startGame() {
-	 document.getElementById("Bnext").style.display="inline-block";
+	document.getElementById("Bnext").style.display="inline-block";
     document.getElementById("Bpred").style.display="inline-block";
     document.getElementById("Bnumero").style.display="inline-block";
     document.getElementById("Bselect").style.display="inline-block";
+    document.getElementById("Bretour").style.display="inline-block";
 }
 
 function addSelected() {
-   console.log(document.getSelection());
-   document.getElementById("textB").value += document.getSelection() + " ";
-};
-
-function requete(){
-	var recherche = document.getElementById("textB").value;
-	console.info("<<< " + recherche + " "+ recherche.substring(0,1));
-	if (recherche.substring(0,1) === "!"){
-		GetDecode(recherche.substring(1));
-		nextClue();
-		startGame() ;
-		console.log(found);
-		return;
+	if (document.getSelection() === null) return;
+	var sel = "" + document.getSelection();
+	sel = sel.trim(sel);
+	sel = sel.replace("'", " ");
+	var split = sel.split(" ");
+	var tot = "";
+	for(var i =0; i < split.length; i++) {
+		if (split[i].length > 2)
+			tot += split[i] + " ";
 	}
-	var recherche = getFileNameFromText(recherche);
-	console.info(">>> " + recherche);
-	if (recherche === "") {
-		if (window.getSelection) {
-        	var text = getFileNameFromText(window.getSelection().toString());
-        	if (text !== "") {
-        		includeScript(text);
-        		return;
-        	}
-        }
-       	startGame();
-		shortcut(0);
-		return;
-	}
-	
-	console.info(doEncCheat(recherche));
-	if (recherche === doDecCheat("U2FsdGVkX19wKQnGwvRJYeY712DsrV8p767JWJsqe2MvNe56f/9UBoVAcBm/WdjT")) 
-	{ window.location = doDecCheat("U2FsdGVkX1/NlOv0aJbNsHJFUTPCEtHhkZWl9ewxHnpMh3FXsB0Gw5SLJJzBaDCv"); }
-	else if (recherche === doDecCheat("")) 
-	{ window.location = doDecCheat("U2FsdGVkX19wH480savj7PZWBnPfJvj58B0e3l9+G6c="); }
-	else includeScript(recherche);
-	document.getElementById("textB").value = "";
+	tot = tot.trim();
+   	if (document.getElementById("textB").value == "")
+   		document.getElementById("textB").value = tot;
+   	else 
+   		document.getElementById("textB").value += " " + tot;
 }
 
 var lastscript = null;
@@ -344,7 +374,7 @@ function includePicture(pic){
 }
 
 function saison(num, j){
-	var jour = j + "&egrave;me jour";
+	var jour = j + " &egrave;me jour";
 	switch(num) {
 	case '3': return "1180, " + jour + " de l'hiver";
 	case '4': return "1180, " + jour + " du printemps";
@@ -353,35 +383,65 @@ function saison(num, j){
 	}
 }
 
+function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
 var found = Array(shortcutsCount).fill(false);
 found[0] = true;
 
-function readJS(type, date, image, texte, medium, numero){
+var foundPredNum = -1;
+var isInInfo = false;
+
+
+function readJS(type, date, image, texte, medium, numero, recherche){
 	document.getElementById("divA").innerHTML = "";
 	console.info("numero" + numero);
-	if (type === "C") 
+	var nouveau = (found[numero] === false);
+	//if (type === "C") 
 	{
 		found[numero] = true;
 		document.getElementById("Bnumero").value = numero;
-	} else {
+		if (nouveau)
+			document.getElementById("Bnumero").style.backgroundColor = 'lightgreen';
+		else
+			document.getElementById("Bnumero").style.backgroundColor = 'buttonface';
+		foundPredNum = numero;
+		isInInfo = false;
+		fileClueIndice++;
+		fileClue[fileClueIndice] = numero;
+		currentClue = numero;
+	}/* else {
 		document.getElementById("Bnumero").value = "X";
-	}
+		isInInfo = true;
+	}*/
+	document.getElementById("divA").innerHTML += "<u>" + capitalizeFirstLetter(recherche) + "</u><br/><br/>";
 
 	if (medium !== "")
-		document.getElementById("divA").innerHTML += "<i>" + setAccents(medium) + "</i><br/>";
+		document.getElementById("divA").innerHTML += "<i><b>SOURCE : " + setAccents(medium) + "</b></i><br/>";
 
 	if (date !== "" && date !== "1 1") {
-		document.getElementById("divA").innerHTML += saison(date.charAt(0), date.substring(1)) + "<br/>";
+		document.getElementById("divA").innerHTML += "<i><b>DATE : " + saison(date.charAt(0), date.substring(1)) + "</b></i><br/>";
 	}
+	document.getElementById("divA").innerHTML += "<br/>";
 	if (image !== "") {
-		document.getElementById("divA").innerHTML += "<img src='../IMAGES/"+image+"'style='max-width:500px; max-height:300px; '/><br/><br/><br/>";
+		document.getElementById("divA").innerHTML += "<img src='../IMAGES/"+image+"'style='max-width:400px; max-height:300px; '/><br/><br/><br/>";
 	}
+	//document.getElementById("divA").innerHTML += "</div>";
 	if (texte !== "")
 		document.getElementById("divA").innerHTML += setAccents(texte);
+
+	document.getElementById("divA").innerHTML += "<br/><br/><br/>";
+
 }
 
 var currentClue = 0;
 function predClue() {
+	if (isInInfo) {
+		currentClue = foundPredNum;
+		shortcut(foundPredNum);
+		return;
+	}
 	do {
 		currentClue--;
 		if (currentClue == -1) currentClue = found.length - 1;
@@ -396,26 +456,53 @@ function nextClue() {
 	shortcut(currentClue);
 }
 
+var fileClue = [];
+fileClue[0] = 0;
+var fileClueIndice = 0;
+function retour(){
+	if (fileClueIndice === 0) return;
+	fileClueIndice--;
+	shortcut(fileClue[fileClueIndice] );
+}
+
 function hints(){
 	var code = GetCode();
 	document.getElementById("divA").innerHTML = setAccents("Faites des recherches. L'ordre des mots ne compte pas, ni les accents. Il vaut mieux éviter les petits mots de liaison ('aller lac' plutôt que 'aller jusqu'au lac')<br/>"
 	+ "Vous pouvez utiliser des prénoms ou des lieux pour spécifier la recherche.<br/>"
 	+ "Une recherche à vide cherche les mots sélectionnés dans le texte.<br/>"
-	+ ">>> ajoute les mots sélectionnés à la recherche<br/>"
-	+ "Code de sauvegarde à chercher : !" + code + " (copié dans le presse papier)");
+	+ ">>> ajoute les mots sélectionnés à la recherche<br/><br/>"
+	+ "<div align='center'>Code de sauvegarde à chercher<br/><b>!" + code + "</b><br/> (copié dans le presse papier)</div>");
 	navigator.clipboard.writeText("!"+code);
 }
 
+//var test = GetCode();
+//GetDecode(test);
+
+function GetCrypt(seed){
+	switch(seed){
+	case '0' : return doDecCheat("U2FsdGVkX1832E01WY03YbwkFY/4tZVwDrbJH39VhwFrTUzNVdmcxJQiUphSj/LNYSPb/wBwrM3V7K4fkEhafw==");
+	case '1' : return doDecCheat("U2FsdGVkX1+v0sPxqzDEgspVQ/ImAq8mDcfdZhcVMvN7iq7SwQhpTdXr4lBtfJca6Ol9vO28D+Ha5XgBB006QYdVAWXNmEfENLBbrzzfKeZjDBF0gy7crAnVRn2Gq89XNDqXCXpThIBNlpv4KiVj+g==");
+	case '2' : return doDecCheat("U2FsdGVkX19Zpiq6Ce3N9h80HE5VYOx+4xgOJQOeqhLEr+yOosPKoEqBdERZRhwaPJtbw6REFq5TSjvVHqxxpYuHdBP5NpNzKwihGyRAJ3FS8gnLj9pH9VrIZsdjduXw/WooT6SOBEzMJskGMl1dQA==");
+	case '3' : return doDecCheat("U2FsdGVkX1/GJ9ksY4MHWBT+stJGnKTIiPrdEuTWi85olnFeqJDbYU8pj+uegncMFkuGi5Z7Uug0KpSE4DyIt+eu0qFeSewQk6VJR5H6DbMz7WmEqs/kkgZ4/ASkUrXlcq2FGrl0Mk67LAsaSYqxlg==");
+	case '4' : return doDecCheat("U2FsdGVkX19aS+H/MweKFTWgu5zmjHMIw1oIBRq6PXo3wPy9o4XRViFXQ+VcptqPvWKdM1fPC/DFbq4SlbuPSIeQtr4D0Guxt8d6ac3l3kqkL3pnsl8gvYw2CEUVFCgK2HSyqQyjKLFJgDcAjs2ceQ==");
+	}
+}
+
+function getRandomInt(max) {
+  	return Math.floor(Math.random() * max);
+}
+
 function GetCode() {
-	/*for(var i=0; i < 20; i++) {
-		found[i] = i%3 === 0;
-	}*/
-	var crypt = doDecCheat("U2FsdGVkX1832E01WY03YbwkFY/4tZVwDrbJH39VhwFrTUzNVdmcxJQiUphSj/LNYSPb/wBwrM3V7K4fkEhafw==");
+	//console.log(found);
+	var rand = "" + getRandomInt(5);
+	var crypt = GetCrypt(rand);
 	var temp = "";
 	var nbTrue = 0;
 	var code = "";
 	var bitCnt = 0;
 	var lastCnt = "";
+	var elt = 1;
+
 	for(var i=0; i < found.length; i++) {
 		var v = found[i] ? 1 : 0;
 		v ^= (crypt.charAt((i*i)%crypt.length) === '1');
@@ -423,30 +510,36 @@ function GetCode() {
 
 		if (found[i]) nbTrue++;
 		if ((i+1)%5 === 0) {
-			//console.info("Bits " + temp);
-			var b = parseInt(temp, 2 );
-			//console.info("b " + b);
+			var b = parseInt(temp, 2);
 			code += GetLetter(b);
-			//console.info("Code " + code);
+			//console.info(elt + " : Bits " + temp + " b " + b + " code " + code);
 			temp = "";
+			elt ++;
 		}
 	}
 	nbTrue = nbTrue % 30;
 	//console.info(">>>Code " + code);
-	code += GetLetter(nbTrue);
+	code = rand + code + GetLetter(nbTrue);
 	//console.info(">>>>>>Code " + code);
 	return code;
 }
 
 function GetDecode(code){
-	//console.log(found);
-	var crypt = doDecCheat("U2FsdGVkX1832E01WY03YbwkFY/4tZVwDrbJH39VhwFrTUzNVdmcxJQiUphSj/LNYSPb/wBwrM3V7K4fkEhafw==");
+	console.log(code);
+	var rand = code.charAt(0);
+	code = code.substring(1);
+	var crypt = GetCrypt(rand);
+	found = Array(shortcutsCount).fill(false);
+	found[0] = true;
 	var nbTrue = 0;
+	var elt = 1;
 	for(var i=0; i < code.length - 1; i++) {
-		var l = GetDeLetter(code.charAt(i));
-		l = l.toString(2);
+		var ch = code.charAt(i);
+		var inv = GetDeLetter(ch);
+		var l = (inv >>> 0).toString(2);
 		while (l.length < 5) l = "0" + l;
-		//console.info("l " + l);
+		//console.info(elt + " : Bits " + l + " b " + inv + " code " + ch);
+
 		for(var j=0; j<5; j++)
 		{
 			var pos = i*5 + j;
@@ -455,7 +548,9 @@ function GetDecode(code){
 			found[pos] = found[pos] === 1 ? true : false;
 			if (found[pos]) nbTrue += 1;
 		}
+		elt++;
 	}
+	//console.log(found);
 	var beacon = GetDeLetter(code.charAt(code.length - 1));
 	if (beacon != nbTrue%30) {
 		alert("Code invalide");
