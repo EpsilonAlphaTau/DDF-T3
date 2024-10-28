@@ -10,19 +10,19 @@
 		
 		<div style='position:fixed;width: 400px;left: 50%;margin-left: -200px;background: white; top: 0px; padding-top: 5px;border-bottom: solid 1px black;padding-bottom: 2px;'>
 			<div>
-				<input type="button" id="Bretour" style="display:none" value="Retour" onclick="retour()">
-				<input type="button" id="Bnumero" style="display:none" value="X" onclick="hints()">
+				<input type="button" id="Bretour" style="display:none; width: 100px; height: 30px; font-size: 20px;" value="Retour" onclick="retour()">
+				<input type="button" id="Bnumero" style="display:none; height: 30px; font-size: 20px;" value="X" onclick="hints()">
 			</div>
-			<input type="text" id="textB" style='width: 300px; '>
+			<input type="text" id="textB" style='width: 400px; margin: 3px; '>
 			<div>
-				<input type="button" id="Bpred" style="display:none" value="<" onclick="predClue()">
-				<input type="button" id="Bselect" style="display:none" value=">>>" onclick="addSelected()">
-				<input type="button" id="requetes" value="Chercher" onclick="requete()">
-				<input type="button" id="Bnext" style="display:none" value=">" onclick="nextClue()">
+				<input type="button" id="Bpred" style="display:none; width: 30px; height: 30px; font-size: 20px;" value="<" onclick="predClue()">
+				<input type="button" id="Bselect" style="display:none; width: 50px; height: 30px; font-size: 20px;" value=">>>" onclick="addSelected()">
+				<input type="button" id="requetes" style="width: 100px; height: 30px; font-size: 20px;" value="Chercher" onclick="requete()">
+				<input type="button" id="Bnext" style="display:none; width: 30px; height: 30px; font-size: 20px;" value=">" onclick="nextClue()">
 			</div>
 		</div>
 		<div align='center'>
-			<div id="divA" style="padding-top:60px;margin: 30px auto; width:400px; height: 600px; " align='left'></div>
+			<div id="divA" style="padding-top:70px;margin: 30px auto; width:400px; " align='left'></div>
 		</div>
 	</div>
 </body>

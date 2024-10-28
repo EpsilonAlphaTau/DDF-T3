@@ -11,24 +11,24 @@ function enterPassword(recherche){
 
 function requete(){
 	var recherche = document.getElementById("textB").value;
-	console.info("<<< " + recherche);
+	//console.info("<<< " + recherche);
 
 	if (recherche.substring(0,1) === "!"){
 		enterPassword(recherche);
 		return;
 	}
 	var recherche = getFileNameFromText(recherche);
-	console.info(">>> " + recherche);
+	//console.info(">>> " + recherche);
 	if (recherche === "") {
 		var cook = getCookie('ddfpwd');
-		if (cook !== "undefined")
+		if (cook !== undefined)
 		{
 			enterPassword("!" + recherche);
 			return;
 		}
-
+		
 		if (window.getSelection) {
-        	var text = getFileNameFromText(window.getSelection().toString());
+        	var text = getFileNameFromText(clearTextFromShorts(window.getSelection().toString()));
         	if (text !== "") {
         		includeScript(text);
         		document.getElementById("textB").value = "";
@@ -41,12 +41,14 @@ function requete(){
 		return;
 	}
 	
-	console.info(doEncCheat(recherche));
+	//console.info(doEncCheat(recherche));
 	if (recherche === doDecCheat("U2FsdGVkX19wKQnGwvRJYeY712DsrV8p767JWJsqe2MvNe56f/9UBoVAcBm/WdjT")) 
 	{ window.location = doDecCheat("U2FsdGVkX1/NlOv0aJbNsHJFUTPCEtHhkZWl9ewxHnpMh3FXsB0Gw5SLJJzBaDCv"); }
 	else if (recherche === doDecCheat("")) 
 	{ window.location = doDecCheat("U2FsdGVkX19wH480savj7PZWBnPfJvj58B0e3l9+G6c="); }
-	else includeScript(recherche);
+	else {
+		includeScript(recherche);
+	}
 	document.getElementById("textB").value = "";
 }
 
@@ -312,10 +314,7 @@ function startGame() {
     document.getElementById("Bselect").style.display="inline-block";
     document.getElementById("Bretour").style.display="inline-block";
 }
-
-function addSelected() {
-	if (document.getSelection() === null) return;
-	var sel = "" + document.getSelection();
+function clearTextFromShorts(sel){
 	sel = sel.trim(sel);
 	sel = sel.replace("'", " ");
 	var split = sel.split(" ");
@@ -324,7 +323,12 @@ function addSelected() {
 		if (split[i].length > 2)
 			tot += split[i] + " ";
 	}
-	tot = tot.trim();
+	return tot.trim();
+}
+function addSelected() {
+	if (document.getSelection() === null) return;
+	var tot = clearTextFromShorts("" + document.getSelection());
+
    	if (document.getElementById("textB").value == "")
    		document.getElementById("textB").value = tot;
    	else 
@@ -338,10 +342,11 @@ function includeEncScript(path){
 function includeScript(path){
 	var script = document.createElement('script');
 	script.src = '../JS/INCLUDES/' + path + '.js';
-	console.info(script.src);
+	//console.info(script.src);
 	if (lastscript !== null) document.body.removeChild(lastscript);
 	lastscript = script;
 	document.body.appendChild(script);
+	window.scrollTo(0, 0);
 }
 
 function includeCodedScript(code) {
@@ -396,7 +401,7 @@ var isInInfo = false;
 
 function readJS(type, date, image, texte, medium, numero, recherche){
 	document.getElementById("divA").innerHTML = "";
-	console.info("numero" + numero);
+	//console.info("numero" + numero);
 	var nouveau = (found[numero] === false);
 	//if (type === "C") 
 	{
@@ -474,7 +479,7 @@ function hints(){
 	+ "Vous pouvez utiliser des prénoms ou des lieux pour spécifier la recherche.<br/>"
 	+ "Une recherche à vide cherche les mots sélectionnés dans le texte.<br/>"
 	+ ">>> ajoute les mots sélectionnés à la recherche<br/><br/>"
-	+ "<div align='center'>Code de sauvegarde à chercher<br/><b>!" + code + "</b><br/> (copié dans le presse papier)</div>");
+	+ "<div align='center'>Code de sauvegarde à chercher<br/><b>!" + code + "</b><br/> (copié dans le presse papier et les cookies)</div>");
 	navigator.clipboard.writeText("!"+code);
 }
 
