@@ -343,10 +343,17 @@ function includeScript(path){
 	window.scrollTo(0, 0);
 }
 
+
 function includeCodedScript(code) {
-	var s = "";
 	var beacon = doDecCheat("U2FsdGVkX1+y0/9aFfuJF7WMok6/CWk8QFck+VviHEJd99Sa0FqR0eDeHtJr88TLZ61+eJVemcOc6R5Mh1HUYA/SB4U44GzwhGByGYBDPO0=");
-	//console.info(beacon + "=>" + code);
+	var s = decodeCodedScript(beacon, code);
+	includeScript(s);
+	//console.info(s);
+}
+
+function decodeCodedScript(beacon, code){
+	var s = "";
+
 	for(var i =0;i<code.length; i++) {
 		var c = code.charAt(i);
 		//console.info("c>>" + c);
@@ -356,13 +363,18 @@ function includeCodedScript(code) {
 		} else {
 			//console.info("c2>>" + c);
 			c = c.charCodeAt(0) - beacon.charAt(i) - 87;
+			//console.info("c>>" + c);
+			if (c < 0 || c >= 26)
+			{
+				c -= 75;
+				//console.info("c2>>" + c);
+			}	
 			//console.info("c2>>" + c);
 		}
 		s += String.fromCharCode(97 + c);
 		//console.info(">>" + s);
 	}
-	//console.info(">>>>>>" + s);
-	includeScript(s);
+	return s;
 }
 
 function includeText (text){
@@ -395,6 +407,7 @@ var isInInfo = false;
 
 function readJS(type, date, image, texte, medium, numero, recherche){
 	document.getElementById("divA").innerHTML = "";
+	document.getElementById("divB").innerHTML = "";
 	//console.info("numero" + numero);
 	var nouveau = (found[numero] === false);
 	//if (type === "C") 
@@ -412,6 +425,8 @@ function readJS(type, date, image, texte, medium, numero, recherche){
 		isInInfo = false;
 		fileClueIndice++;
 		fileClue[fileClueIndice] = numero;
+		console.info("ind" + fileClueIndice);
+		console.log(fileClue);
 		currentClue = numero;
 	}/* else {
 		document.getElementById("Bnumero").value = "X";
@@ -427,13 +442,13 @@ function readJS(type, date, image, texte, medium, numero, recherche){
 	}
 	document.getElementById("divA").innerHTML += "<br/>";
 	if (image !== "") {
-		document.getElementById("divA").innerHTML += "<img src='../IMAGES/"+image+"'style='max-width:400px; max-height:300px; '/><br/><br/><br/>";
+		document.getElementById("divA").innerHTML += "<img src='../IMAGES/"+image+"'style='max-width:400px; max-height:300px; '/><br/><br/>";
 	}
 	//document.getElementById("divA").innerHTML += "</div>";
 	if (texte !== "")
-		document.getElementById("divA").innerHTML += setAccents(texte);
+		document.getElementById("divB").innerHTML += setAccents(texte);
 
-	document.getElementById("divA").innerHTML += "<br/><br/><br/>";
+	document.getElementById("divB").innerHTML += "<br/><br/><br/>";
 
 }
 
@@ -462,9 +477,11 @@ var fileClue = [];
 fileClue[0] = 0;
 var fileClueIndice = 0;
 function retour(){
+	console.info("ind" + fileClueIndice);
+	console.log(fileClue);
 	if (fileClueIndice === 0) return;
-	fileClueIndice--;
-	shortcut(fileClue[fileClueIndice] );
+	fileClueIndice-=2;
+	shortcut(fileClue[fileClueIndice]);
 }
 
 function hints(){
