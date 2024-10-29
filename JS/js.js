@@ -20,15 +20,13 @@ function requete(){
 	var recherche = getFileNameFromText(recherche);
 	//console.info(">>> " + recherche);
 	if (recherche === "") {
-		
-		if (window.getSelection) {
-        	var text = getFileNameFromText(clearTextFromShorts(window.getSelection().toString()));
-        	if (text !== "") {
-        		includeScript(text);
-        		document.getElementById("textB").value = "";
-        		return;
-        	}
-        }
+    	var text = getFileNameFromText(clearTextFromShorts(getSelectedText()));
+    	if (text !== "") {
+    		includeScript(text);
+    		document.getElementById("textB").value = "";
+    		return;
+    	}
+
        	startGame();
 		shortcut(0);
 		document.getElementById("textB").value = "";
@@ -46,6 +44,20 @@ function requete(){
 	document.getElementById("textB").value = "";
 }
 
+function getSelectedText() {
+    var selection = null;
+
+    if (window.getSelection) {
+        selection = window.getSelection();
+    } else if (typeof document.selection != "undefined") {
+        selection = document.selection;
+    }
+
+    //var selectedRange = selection.getRangeAt(0);
+
+    console.log(selection.toString());
+    return selection.toString();
+}
 
 function doEnc(item) {
 	var encrypted = CryptoJS.AES.encrypt(item, encrypter);
@@ -309,7 +321,7 @@ function startGame() {
     document.getElementById("Bretour").style.display="inline-block";
 }
 function clearTextFromShorts(sel){
-	sel = sel.trim(sel);
+	sel = sel.trim();
 	sel = sel.replace("'", " ");
 	var split = sel.split(" ");
 	var tot = "";
@@ -320,8 +332,9 @@ function clearTextFromShorts(sel){
 	return tot.trim();
 }
 function addSelected() {
-	if (document.getSelection() === null) return;
-	var tot = clearTextFromShorts("" + document.getSelection());
+	var sel = getSelectedText();
+	if (sel === null || sel === "") return;
+	var tot = clearTextFromShorts(sel);
 
    	if (document.getElementById("textB").value == "")
    		document.getElementById("textB").value = tot;
