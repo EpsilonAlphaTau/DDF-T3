@@ -391,10 +391,12 @@ function decodeCodedScript(beacon, code){
 }
 
 function includeText (text){
-	document.getElementById("divA").innerHTML = setAccents(text);
+	document.getElementById("divA").innerHTML = "";
+	document.getElementById("divB").innerHTML = setAccents(text);
 }
 function includePicture(pic){
 	document.getElementById("divA").innerHTML = "<img src='../IMAGES/"+pic+"'style='max-width:500px; max-height:300px; '/>";
+	document.getElementById("divA").innerHTML = "";
 }
 
 function saison(num, j){
@@ -419,8 +421,10 @@ var isInInfo = false;
 
 
 function readJS(type, date, image, texte, medium, numero, recherche){
-	document.getElementById("divA").innerHTML = "";
-	document.getElementById("divB").innerHTML = "";
+	var diva = document.getElementById("divA");
+	var divb = document.getElementById("divB");
+	diva.innerHTML = "";
+	divb.innerHTML = "";
 	//console.info("numero" + numero);
 	var nouveau = (found[numero] === false);
 	//if (type === "C") 
@@ -443,23 +447,22 @@ function readJS(type, date, image, texte, medium, numero, recherche){
 		document.getElementById("Bnumero").value = "X";
 		isInInfo = true;
 	}*/
-	document.getElementById("divA").innerHTML += "<u>" + capitalizeFirstLetter(recherche) + "</u><br/><br/>";
+	diva.innerHTML += "<u>" + capitalizeFirstLetter(recherche) + "</u><br/><br/>";
 
 	if (medium !== "")
-		document.getElementById("divA").innerHTML += "<i><b>SOURCE : " + setAccents(medium) + "</b></i><br/>";
+		diva.innerHTML += "<i><b>SOURCE : " + setAccents(medium) + "</b></i><br/>";
 
 	if (date !== "" && date !== "1 1") {
-		document.getElementById("divA").innerHTML += "<i><b>DATE : " + saison(date.charAt(0), date.substring(1)) + "</b></i><br/>";
+		diva.innerHTML += "<i><b>DATE : " + saison(date.charAt(0), date.substring(1)) + "</b></i><br/>";
 	}
-	document.getElementById("divA").innerHTML += "<br/>";
+	diva.innerHTML += "<br/>";
 	if (image !== "") {
-		document.getElementById("divA").innerHTML += "<img src='../IMAGES/"+image+"'style='max-width:400px; max-height:300px; '/><br/><br/>";
+		diva.innerHTML += "<img src='../IMAGES/"+image+"'style='max-width:400px; max-height:300px; '/><br/><br/>";
 	}
-	//document.getElementById("divA").innerHTML += "</div>";
 	if (texte !== "")
-		document.getElementById("divB").innerHTML += setAccents(texte);
+		divb.innerHTML += setAccents(texte);
 
-	document.getElementById("divB").innerHTML += "<br/><br/><br/>";
+	divb.innerHTML += "<br/><br/><br/>";
 
 }
 
@@ -495,6 +498,7 @@ function retour(){
 
 function hints(){
 	var code = GetCode();
+	document.getElementById("divA").innerHTML = "";
 	document.getElementById("divA").innerHTML = setAccents("Faites des recherches. L'ordre des mots ne compte pas, ni les accents. Il vaut mieux éviter les petits mots de liaison ('aller lac' plutôt que 'aller jusqu'au lac')<br/>"
 	+ "Vous pouvez utiliser des prénoms ou des lieux pour spécifier la recherche.<br/>"
 	+ "Une recherche à vide cherche les mots sélectionnés dans le texte.<br/>"
