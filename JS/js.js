@@ -396,7 +396,7 @@ function includeText (text){
 }
 function includePicture(pic){
 	document.getElementById("divA").innerHTML = "<img src='../IMAGES/"+pic+"'style='max-width:500px; max-height:300px; '/>";
-	document.getElementById("divA").innerHTML = "";
+	document.getElementById("divB").innerHTML = "";
 }
 
 function saison(num, j){
@@ -499,11 +499,11 @@ function retour(){
 function hints(){
 	var code = GetCode();
 	document.getElementById("divA").innerHTML = "";
-	document.getElementById("divA").innerHTML = setAccents("Faites des recherches. L'ordre des mots ne compte pas, ni les accents. Il vaut mieux éviter les petits mots de liaison ('aller lac' plutôt que 'aller jusqu'au lac')<br/>"
+	document.getElementById("divB").innerHTML = setAccents("Faites des recherches. L'ordre des mots ne compte pas, ni les accents. Il vaut mieux éviter les petits mots de liaison ('aller lac' plutôt que 'aller jusqu'au lac')<br/>"
 	+ "Vous pouvez utiliser des prénoms ou des lieux pour spécifier la recherche.<br/>"
 	+ "Une recherche à vide cherche les mots sélectionnés dans le texte.<br/>"
 	+ ">>> ajoute les mots sélectionnés à la recherche<br/><br/>"
-	+ "<div align='center'>Code de sauvegarde à chercher<br/><b>!" + code + "</b><br/> (copié dans le presse papier et les cookies)</div>");
+	+ "<div align='center'>Code de sauvegarde à chercher<br/><b>!" + code + "</b><br/> (copié dans le presse papier)</div>");
 	navigator.clipboard.writeText("!"+code);
 }
 
@@ -553,11 +553,33 @@ function GetCode() {
 	//console.info(">>>Code " + code);
 	code = rand + code + GetLetter(nbTrue);
 	//console.info(">>>>>>Code " + code);
-	document.cookie = 'ddfpwd='+code
+	setCookie(code);
 	return code;
 }
 
+function setCookie(cvalue) {
+  const d = new Date();
+  d.setTime(d.getTime() + (1000*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = "ddfpwd=" + cvalue + ";" + expires + ";path=/";
+}
 
+function getCookie() {
+  let name = "ddfpwd=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+/*
 function getCookie(c_name) {
     var i, x, y, ARRcookies = document.cookie.split(";");
     for (i = 0; i < ARRcookies.length; i++) {
@@ -568,7 +590,7 @@ function getCookie(c_name) {
             return unescape(y);
         }
     }
-}
+}*/
 
 function GetDecode(code){
 	console.log(code);

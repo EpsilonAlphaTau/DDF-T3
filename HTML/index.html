@@ -31,8 +31,8 @@
 </body>
 
 <script type="text/javascript">
-	var cook = getCookie('ddfpwd');
-	if (cook !== undefined)
+	var cook = getCookie();
+	if (cook !== undefined && cook !== "")
 	{
 		enterPassword("!" + cook);
 	}
