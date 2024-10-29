@@ -1,1 +1,1 @@
-readJS('C','','',"C'est certainement ça ! Ca ressemble à un de ses dessins, dans sa chambre.",'Signe',215, 'signe volcan');
+readJS('C','','',"C'est certainement ça ! Ca ressemble à l'un des dessins de sa chambre...",'Signe',224, 'signe volcan');

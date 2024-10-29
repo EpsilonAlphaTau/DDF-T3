@@ -1,1 +1,1 @@
-readJS('I','','',"Des robes, des braies, un bonnet de nuit et des gants.",'Chambre de Bonavar',87, 'habits Bonavar');
+readJS('I','','',"Des robes, des braies, un bonnet de nuit et des gants.",'Chambre de Bonavar',93, 'habits Bonavar');

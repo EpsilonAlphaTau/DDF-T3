@@ -1,1 +1,1 @@
-readJS('C','','',"<i>Le Datura est une plante toxique dont la consommation provoue des visions cauchemardesques. Est-ce ce qui a causé les évènements étranges à Luciandath ?</i>",'Lexique de Bonavar',43, 'datura');
+readJS('C','','',"<i>Le Datura est une plante toxique dont la consommation provoue des visions cauchemardesques. Est-ce ce qui a causé les évènements étranges à Luciandath ?</i>",'Lexique de Bonavar',48, 'datura');

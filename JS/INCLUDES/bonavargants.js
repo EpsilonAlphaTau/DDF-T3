@@ -1,1 +1,1 @@
-readJS('C','','',"des gants pleins de terre",'Chambre de Bonavar',88, 'gants Bonavar');
+readJS('C','','',"Des gants pleins de terre.",'Chambre de Bonavar',94, 'gants Bonavar');

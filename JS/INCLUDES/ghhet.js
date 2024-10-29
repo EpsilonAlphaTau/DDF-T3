@@ -1,1 +1,1 @@
-readJS('C','','',"Le premier arrivé. C'était un élémentaire, venu en bateau depuis l'autre côté de l'Océan.",'',41, 'Ghhet');
+readJS('C','','',"Le premier arrivé. C'était un élémentaire, venu en bateau depuis l'autre côté de l'Océan.",'',46, 'Ghhet');

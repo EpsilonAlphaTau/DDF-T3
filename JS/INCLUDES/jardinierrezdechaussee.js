@@ -1,1 +1,1 @@
-readJS('C','','',"C'est étrange que travaillant sur le toit, sa chambre soit si éloignée. Tous les jours il lui fallait gravir et redescendre des milliers de marches...",'Chambre du jardinier',167, 'rez-de-chaussée jardinier');
+readJS('C','','',"C'est étrange que travaillant sur le toit, sa chambre soit si éloignée. Tous les jours il lui fallait gravir et redescendre des milliers de marches...",'Chambre du jardinier',176, 'rez-de-chaussée jardinier');

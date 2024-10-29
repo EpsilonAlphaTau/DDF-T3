@@ -1,1 +1,1 @@
-readJS('C','1 1','signamain.png',"Voilà ce que j'ai noté : ça ne ressemble plus à rien...",'Moi',162, 'note signe ');
+readJS('C','1 1','signamain.png',"Voilà ce que j'ai noté : ça ne ressemble plus à rien...",'Moi',171, 'note signe ');

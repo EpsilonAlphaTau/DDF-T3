@@ -1,1 +1,1 @@
-readJS('C','','',"Elle est trop haute pour que je vois dessus...",'Chambre du jardinier',180, 'armoire jardinier dessus');
+readJS('C','','',"Elle est trop haute pour que je voie dessus...",'Chambre du jardinier',189, 'armoire jardinier dessus');
