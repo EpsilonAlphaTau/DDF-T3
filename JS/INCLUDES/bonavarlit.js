@@ -1,1 +1,1 @@
-readJS('I','','',"Assez confortable.",'Chambre de Bonavar',90, 'lit Bonavar');
+readJS('I','','',"Assez confortable.",'Chambre de Bonavar',92, 'lit Bonavar');

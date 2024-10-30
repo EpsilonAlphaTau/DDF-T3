@@ -1,1 +1,1 @@
-readJS('C','','',"<i>C'est son nom !</i>, indique Bonavar. Mais le nom de quoi ?",'Lexique de Bonavar',146, 'Annihilation');
+readJS('C','','',"<i>C'est son nom !</i>, indique Bonavar. Mais le nom de quoi ?",'Lexique de Bonavar',148, 'Annihilation');
