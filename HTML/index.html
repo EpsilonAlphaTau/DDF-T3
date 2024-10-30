@@ -18,14 +18,13 @@
 			<input type="text" id="textB" style='width: 400px; margin: 3px; '>
 			<div>
 				<input type="button" id="Bpred" style="display:none; width: 30px; height: 30px; font-size: 20px;" value="<" onclick="predClue()">
-				<input type="button" id="Bselect" style="display:none; width: 50px; height: 30px; font-size: 20px;" value=">>>" onclick="addSelected()">
 				<input type="button" id="requetes" style="width: 100px; height: 30px; font-size: 20px;" value="Chercher" onclick="requete()">
 				<input type="button" id="Bnext" style="display:none; width: 30px; height: 30px; font-size: 20px;" value=">" onclick="nextClue()">
 			</div>
 		</div>
 		<div align='center'>
 			<div id="divA" style="padding-top:110px; width:400px; " align='center'></div>
-			<div id="divB" style="margin: 0px auto; width:400px; " align='left'></div>
+			<div id="divB" style="margin: 0px auto; width:400px; text-align: justify;" ></div>
 		</div>
 	</div>
 </body>
@@ -43,7 +42,7 @@
 	    	document.getElementById("requetes").click();
 	  	}
 	});
-		
+	
 </script>
 </html>
 

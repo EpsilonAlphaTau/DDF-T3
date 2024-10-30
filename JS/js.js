@@ -302,7 +302,7 @@ function check(){
 }
 
 function normalize(text) {
-	return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replaceAll("[^A-Za-z0-9]", "");//.replace(/\s+/g, '')
+	return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\W/g, '')/*.replaceAll("[^A-Za-z0-9]", "")*/;//.replace(/\s+/g, '')
 }
 
 function getFileNameFromText(text){
@@ -317,7 +317,6 @@ function startGame() {
 	document.getElementById("Bnext").style.display="inline-block";
     document.getElementById("Bpred").style.display="inline-block";
     document.getElementById("Bnumero").style.display="inline-block";
-    document.getElementById("Bselect").style.display="inline-block";
     document.getElementById("Bretour").style.display="inline-block";
 }
 function clearTextFromShorts(sel){
@@ -425,28 +424,23 @@ function readJS(type, date, image, texte, medium, numero, recherche){
 	var divb = document.getElementById("divB");
 	diva.innerHTML = "";
 	divb.innerHTML = "";
-	//console.info("numero" + numero);
+	console.info("numero" + numero);
 	var nouveau = (found[numero] === false);
-	//if (type === "C") 
+	found[numero] = true;
+	document.getElementById("Bnumero").value = numero;
+	if (nouveau)
 	{
-		found[numero] = true;
-		document.getElementById("Bnumero").value = numero;
-		if (nouveau)
-		{
-			GetCode();
-			document.getElementById("Bnumero").style.backgroundColor = 'lightgreen';
-		}	
-		else
-			document.getElementById("Bnumero").style.backgroundColor = 'buttonface';
-		foundPredNum = numero;
-		isInInfo = false;
-		fileClueIndice++;
-		fileClue[fileClueIndice] = numero;
-		currentClue = numero;
-	}/* else {
-		document.getElementById("Bnumero").value = "X";
-		isInInfo = true;
-	}*/
+		GetCode();
+		document.getElementById("Bnumero").style.backgroundColor = 'lightgreen';
+	}	
+	else
+		document.getElementById("Bnumero").style.backgroundColor = 'buttonface';
+	foundPredNum = numero;
+	isInInfo = false;
+	fileClueIndice++;
+	fileClue[fileClueIndice] = numero;
+	currentClue = numero;
+	
 	diva.innerHTML += "<u>" + capitalizeFirstLetter(recherche) + "</u><br/><br/>";
 
 	if (medium !== "")
@@ -460,10 +454,60 @@ function readJS(type, date, image, texte, medium, numero, recherche){
 		diva.innerHTML += "<img src='../IMAGES/"+image+"'style='max-width:400px; max-height:300px; '/><br/><br/>";
 	}
 	if (texte !== "")
-		divb.innerHTML += setAccents(texte);
+		divb.innerHTML = setOnClicks(texte);
 
 	divb.innerHTML += "<br/><br/><br/>";
+}
 
+function setOnClicks(texte){
+	var value = "";
+	var idx = texte.indexOf('<');
+	if (idx !== -1) {
+		value += doOnClicks(texte.substring(0, idx));
+		var idx2 = texte.indexOf('>');
+		value += texte.substring(idx, idx2 + 1);
+		idx = texte.indexOf('<');
+		if (idx !== -1) 
+			value += setOnClicks(texte.substring(idx2 + 1));
+		else 
+			value += doOnClicks(texte.substring(idx2 + 1));
+	} else 
+		value += doOnClicks(texte);
+	return value;
+}
+
+function doOnClicks(texte){
+	var value = "";
+	var split = texte.split(" ");
+	for(var i =0; i < split.length; i++) {
+		var split2 = split[i].split("'");
+		for(var j =0; j < split2.length; j++) {
+			var final = normalize(split2[j]);
+			if (j > 0)
+				value += "<span onclick=\"addSpanContent('"+final+"')\">'" + split2[j] + "</span>";
+			else
+				value += "<span onclick=\"addSpanContent('"+final+"')\">" + split2[j] + "</span>";
+
+		}
+		value += " ";
+	}
+	return value;
+}
+
+function aCompleter(texte){
+	var diva = document.getElementById("divA");
+	var divb = document.getElementById("divB");
+	diva.innerHTML = "</br>'" + texte + "' doit être combiné avec un ou plusieurs autres mots...";
+	divb.innerHTML = "";
+	document.getElementById("Bnumero").style.backgroundColor = 'buttonface';
+	document.getElementById("Bnumero").value = '?';
+	document.getElementById("textB").value = texte;
+	fileClueIndice++;
+	fileClue[fileClueIndice] = -1;
+}
+
+function addSpanContent(texte){
+	document.getElementById("textB").value += texte + " ";
 }
 
 var currentClue = 0;
@@ -492,8 +536,15 @@ fileClue[0] = 0;
 var fileClueIndice = 0;
 function retour(){
 	if (fileClueIndice === 0) return;
-	fileClueIndice-=2;
-	shortcut(fileClue[fileClueIndice]);
+	console.log(fileClue);
+	console.info(fileClueIndice);
+	fileClueIndice--;
+	while (fileClue[fileClueIndice] == -1)
+		fileClueIndice --;
+	var toGo = fileClueIndice;
+	fileClueIndice--;
+	document.getElementById("textB").value = "";
+	shortcut(fileClue[toGo]);
 }
 
 function hints(){
@@ -501,9 +552,9 @@ function hints(){
 	document.getElementById("divA").innerHTML = "";
 	document.getElementById("divB").innerHTML = setAccents("Faites des recherches. L'ordre des mots ne compte pas, ni les accents. Il vaut mieux éviter les petits mots de liaison ('aller lac' plutôt que 'aller jusqu'au lac')<br/>"
 	+ "Vous pouvez utiliser des prénoms ou des lieux pour spécifier la recherche.<br/>"
-	+ "Une recherche à vide cherche les mots sélectionnés dans le texte.<br/>"
-	+ ">>> ajoute les mots sélectionnés à la recherche<br/><br/>"
-	+ "<div align='center'>Code de sauvegarde à chercher<br/><b>!" + code + "</b><br/> (copié dans le presse papier)</div>");
+	+ "Une recherche à vide cherche les mots sélectionnés.<br/>"
+	+ "Cliquez sur les mots du texte pour les ajouter à la recherche<br/><br/>"
+	+ "<div align='center'>Code de sauvegarde à chercher<br/><b>!" + code + "</b><br/> (copié dans le presse papier et les cookies)</div>");
 	navigator.clipboard.writeText("!"+code);
 }
 
@@ -619,11 +670,11 @@ function GetDecode(code){
 		elt++;
 	}
 	//console.log(found);
-	var beacon = GetDeLetter(code.charAt(code.length - 1));
+	/*var beacon = GetDeLetter(code.charAt(code.length - 1));
 	if (beacon != nbTrue%30) {
 		alert("Code invalide");
 		found = [];
-	}
+	}*/
 	//console.log(found);
 }
 
