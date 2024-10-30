@@ -441,10 +441,10 @@ function readJS(type, date, image, texte, medium, numero, recherche){
 	fileClue[fileClueIndice] = numero;
 	currentClue = numero;
 	
-	diva.innerHTML += "<u>" + capitalizeFirstLetter(recherche) + "</u><br/><br/>";
+	diva.innerHTML += "<u>" + setOnClicks(capitalizeFirstLetter(recherche)) + "</u><br/><br/>";
 
 	if (medium !== "")
-		diva.innerHTML += "<i><b>SOURCE : " + setAccents(medium) + "</b></i><br/>";
+		diva.innerHTML += "<i><b>SOURCE : " + setOnClicks(medium) + "</b></i><br/>";
 
 	if (date !== "" && date !== "1 1") {
 		diva.innerHTML += "<i><b>DATE : " + saison(date.charAt(0), date.substring(1)) + "</b></i><br/>";
