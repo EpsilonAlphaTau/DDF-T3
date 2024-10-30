@@ -1,1 +1,1 @@
-readJS('C','','',"C'est ça ! Bonavar m'a désigné un arbre ! Il a certainement voulu m'indiquer quelque chose avec le jardinier !",'Signe',175, 'signe jardinier');
+readJS('C','','',"C'est ça ! Bonavar m'a désigné un arbre ! Il a certainement voulu m'indiquer quelque chose avec le jardinier !",'Signe',190, 'signe jardinier');

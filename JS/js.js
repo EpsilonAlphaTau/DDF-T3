@@ -550,10 +550,11 @@ function retour(){
 function hints(){
 	var code = GetCode();
 	document.getElementById("divA").innerHTML = "";
-	document.getElementById("divB").innerHTML = setAccents("Faites des recherches. L'ordre des mots ne compte pas, ni les accents. Il vaut mieux éviter les petits mots de liaison ('aller lac' plutôt que 'aller jusqu'au lac')<br/>"
+	document.getElementById("divB").innerHTML = setAccents("Faites des recherches. L'ordre des mots ne compte pas, ni les accents. Il vaut mieux éviter les petits mots de liaison ('aller lac' plutôt que 'aller jusqu'au lac').<br/>"
 	+ "Vous pouvez utiliser des prénoms ou des lieux pour spécifier la recherche.<br/>"
 	+ "Une recherche à vide cherche les mots sélectionnés.<br/>"
-	+ "Cliquez sur les mots du texte pour les ajouter à la recherche<br/><br/>"
+	+ "Cliquez sur les mots du texte pour les ajouter à la recherche.<br/>"
+	+ "Jusqu'où cela peut-il mener ? L'aventure se termine à l'indice 244.<br/>"	
 	+ "<div align='center'>Code de sauvegarde à chercher<br/><b>!" + code + "</b><br/> (copié dans le presse papier et les cookies)</div>");
 	navigator.clipboard.writeText("!"+code);
 }
@@ -656,6 +657,11 @@ function GetDecode(code){
 		var ch = code.charAt(i);
 		var inv = GetDeLetter(ch);
 		var l = (inv >>> 0).toString(2);
+		if (l.length > 5) {
+			alert("Code invalide");
+			found = [];
+			return;
+		}
 		while (l.length < 5) l = "0" + l;
 		//console.info(elt + " : Bits " + l + " b " + inv + " code " + ch);
 
