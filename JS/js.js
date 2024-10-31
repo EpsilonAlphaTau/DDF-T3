@@ -655,11 +655,12 @@ function getCookieName(nom) {
 }
 
 function doTest(){
+	console.info("TESTING !")
 	var longText = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/";
 	longText = longText + longText + longText + longText + longText + longText + longText + longText;
 	longText = longText + longText + longText + longText + longText + longText + longText + longText;
 	setCookieName(longText, 'resume');
-	alert(getCookieName, 'resume');
+	alert(getCookieName('resume'));
 }
 
 
