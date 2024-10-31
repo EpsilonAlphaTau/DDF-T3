@@ -17,10 +17,15 @@ function requete(){
 		enterPassword(recherche);
 		return;
 	}
+	if (recherche === "DOTEST") {
+		doTest();
+		return;
+	}
 	if (recherche === "NEWGAME") {
 		found = [];
 		startGame();
 		shortcut(0);
+    	document.getElementById("Bnumero").value="?";
 		document.getElementById("textB").value = "";
 		return;
 	}
@@ -36,6 +41,7 @@ function requete(){
 
        	startGame();
 		shortcut(0);
+    	document.getElementById("Bnumero").value="?";
 		document.getElementById("textB").value = "";
 		return;
 	}
@@ -442,6 +448,8 @@ function readJS(type, date, image, texte, medium, numero, recherche){
 	}	
 	else
 		document.getElementById("Bnumero").style.backgroundColor = 'buttonface';
+	if (numero === 0)
+    	document.getElementById("Bnumero").value="?";
 	foundPredNum = numero;
 	isInInfo = false;
 	fileClueIndice++;
@@ -618,14 +626,20 @@ function GetCode() {
 }
 
 function setCookie(cvalue) {
+	setCookieName(cvalue, 'ddfpwd');
+}
+function setCookieName(cvalue, name) {
   const d = new Date();
   d.setTime(d.getTime() + (1000*24*60*60*1000));
   let expires = "expires="+ d.toUTCString();
-  document.cookie = "ddfpwd=" + cvalue + ";" + expires + ";path=/";
+  document.cookie = name + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 function getCookie() {
-  let name = "ddfpwd=";
+	return getCookieName('ddfpwd');
+}
+function getCookieName(nom) {
+  let name = nom + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
   let ca = decodedCookie.split(';');
   for(let i = 0; i <ca.length; i++) {
@@ -639,18 +653,15 @@ function getCookie() {
   }
   return "";
 }
-/*
-function getCookie(c_name) {
-    var i, x, y, ARRcookies = document.cookie.split(";");
-    for (i = 0; i < ARRcookies.length; i++) {
-        x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
-        y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
-        x = x.replace(/^\s+|\s+$/g, "");
-        if (x == c_name) {
-            return unescape(y);
-        }
-    }
-}*/
+
+function doTest(){
+	var longText = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/";
+	longText = longText + longText + longText + longText + longText + longText + longText + longText;
+	longText = longText + longText + longText + longText + longText + longText + longText + longText;
+	setCookieName(longText, 'resume');
+	alert(getCookieName, 'resume');
+}
+
 
 function GetDecode(code){
 	console.log(code);
