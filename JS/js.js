@@ -474,6 +474,24 @@ function readJS(type, date, image, texte, medium, numero, recherche){
 	divb.innerHTML += "<br/><br/><br/>";
 }
 
+function links(list){
+	if (list.trim() === "") {
+		document.getElementById("requetes").value = "Chercher";
+		return;
+	}
+	var split = list.split(";");
+	var fini = true;
+	for(var i =0; i < split.length; i++) {
+		console.info(i + "=>" + found[split[i]]);
+		if (!found[split[i]])
+			fini = false;
+	}
+	if (!fini)
+		document.getElementById("requetes").value = "Chercher...";
+	else
+		document.getElementById("requetes").value = "Chercher";
+}
+
 function setOnClicks(texte){
 	var value = "";
 	var idx = texte.indexOf('<');
@@ -570,6 +588,7 @@ function hints(){
 	+ "Une recherche à vide cherche les mots sélectionnés.<br/><br/>"
 	+ "Cliquez sur les mots du texte pour les ajouter à la recherche.<br/><br/>"
 	+ "Si une piste ne mène plus nulle part, c'est peut-être qu'une autre est à suivre en parallèle.<br/><br/>"
+	+ "Quand toutes les pistes importantes ont été trouvées depuis un indice, les petits points disparaissent après 'Cherchez...'.<br/><br/>"
 	+ "Jusqu'où cela peut-il mener ? L'aventure se termine à l'indice "+ lastClue +".<br/><br/>"	
 	+ "<div align='center'>Code de sauvegarde à chercher<br/><br/><b>!" + code + "</b><br/><br/> (copié dans le presse papier et les cookies)</div>");
 	navigator.clipboard.writeText("!"+code);
