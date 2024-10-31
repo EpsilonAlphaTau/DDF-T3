@@ -1,1 +1,1 @@
-readJS('C','','',"Néant",'Chambre de Bonavar',106, 'dessin 7 dos');
+readJS('C','1 1','',"Néant",'Chambre de Bonavar',47, 'dessin 7 dos');

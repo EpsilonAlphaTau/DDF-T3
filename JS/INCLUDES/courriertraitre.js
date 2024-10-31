@@ -1,1 +1,1 @@
-readJS('C','','',"Oui ! Quelqu'un a dû intercepter les courriers qu'il m'envoyait. J'espère qu'il les a codés ! <br/>Comment les retrouver, maintenant ?",'Moi',142, 'courrier traitre');
+readJS('C','','',"Oui ! Quelqu'un a dû intercepter les courriers qu'il m'envoyait... Tanatien ! J'espère que Bonavar les a codés ! <br/>Comment les retrouver, maintenant ? Tanatien a dû les cacher quelque part...",'Moi',144, 'courrier traitre');

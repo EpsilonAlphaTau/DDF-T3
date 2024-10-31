@@ -17,7 +17,14 @@ function requete(){
 		enterPassword(recherche);
 		return;
 	}
-	var recherche = getFileNameFromText(recherche);
+	if (recherche === "NEWGAME") {
+		found = [];
+		startGame();
+		shortcut(0);
+		document.getElementById("textB").value = "";
+		return;
+	}
+	recherche = getFileNameFromText(recherche);
 	//console.info(">>> " + recherche);
 	if (recherche === "") {
     	var text = getFileNameFromText(clearTextFromShorts(getSelectedText()));
@@ -550,12 +557,13 @@ function retour(){
 function hints(){
 	var code = GetCode();
 	document.getElementById("divA").innerHTML = "";
-	document.getElementById("divB").innerHTML = setAccents("Faites des recherches. L'ordre des mots ne compte pas, ni les accents. Il vaut mieux éviter les petits mots de liaison ('aller lac' plutôt que 'aller jusqu'au lac').<br/>"
-	+ "Vous pouvez utiliser des prénoms ou des lieux pour spécifier la recherche.<br/>"
-	+ "Une recherche à vide cherche les mots sélectionnés.<br/>"
-	+ "Cliquez sur les mots du texte pour les ajouter à la recherche.<br/>"
-	+ "Jusqu'où cela peut-il mener ? L'aventure se termine à l'indice 244.<br/>"	
-	+ "<div align='center'>Code de sauvegarde à chercher<br/><b>!" + code + "</b><br/> (copié dans le presse papier et les cookies)</div>");
+	document.getElementById("divB").innerHTML = setAccents("Faites des recherches. L'ordre des mots ne compte pas, ni les accents. Il vaut mieux éviter les petits mots de liaison ('aller lac' plutôt que 'aller jusqu'au lac').<br/><br/>"
+	+ "Vous pouvez utiliser des prénoms ou des lieux pour spécifier la recherche.<br/><br/>"
+	+ "Une recherche à vide cherche les mots sélectionnés.<br/><br/>"
+	+ "Cliquez sur les mots du texte pour les ajouter à la recherche.<br/><br/>"
+	+ "Si une piste ne mène plus nulle part, c'est peut-être qu'une autre est à suivre en parallèle.<br/><br/>"
+	+ "Jusqu'où cela peut-il mener ? L'aventure se termine à l'indice "+ lastClue +".<br/><br/>"	
+	+ "<div align='center'>Code de sauvegarde à chercher<br/><br/><b>!" + code + "</b><br/><br/> (copié dans le presse papier et les cookies)</div>");
 	navigator.clipboard.writeText("!"+code);
 }
 
