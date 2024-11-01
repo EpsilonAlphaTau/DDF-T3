@@ -1,2 +1,2 @@
-readJS('I','','',"Je dirais qu'il appartient au cadavre...",'Cabinet souterrain',229, 'cabinet sang');
-links('')
+readJS('I','','',"Je dirais qu'il appartient au cadavre...",'Cabinet souterrain',229, 'cabinet sang', 230);
+links('');

@@ -1,2 +1,2 @@
-readJS('C','1 1','',"Bonavar Barbillon est l'ancien archiviste. C'était un homme affable, méticuleux et passionné. Il oeuvrait à Luciandath depuis plus de dix années, sans que jamais personne n'ait à redire de son comportement.<br/>Mais désormais, on ose à peine parler de lui, ou de la suite d'événements qui s'est déroulée... Tout juste évoque-t-on avec nostalgie son obsession pour son fameux lexique.",'Bruits de couloir',1, 'Bonavar ');
-links('26;30;29;10')
+readJS('C','1 1','',"Bonavar Barbillon est l'ancien archiviste. C'était un homme affable, méticuleux et passionné. Il oeuvrait à Luciandath depuis plus de dix années, sans que jamais personne n'ait à redire de son comportement.<br/>Mais désormais, on ose à peine parler de lui, ou de la suite d'événements qui s'est déroulée... Tout juste évoque-t-on avec nostalgie son obsession pour son fameux lexique.",'Bruits de couloir',1, 'Bonavar ', 1);
+links('26;30;29;10');

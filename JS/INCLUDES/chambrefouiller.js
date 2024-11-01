@@ -1,1 +1,0 @@
-readJS('C','','',"Dans la chambre de Bonavar, il y a des dessins, une armoire avec ses habits, un lit, une carte accrochée au mur, et les fameux tomes de son immense lexique.<br/><br/><i>Pour fouiller les affaires de Bonavar, indiquez Bonavar dans la recherche</i>",'Chambre de Bonavar',87, 'fouiller chambre');

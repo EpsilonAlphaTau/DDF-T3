@@ -1,2 +1,2 @@
-readJS('C','1 1','',"C'est la chambre que vous occuperez. <br/>Bonavar dessinait beaucoup, quelques-uns de ses dessins sont exposés sur des étagères, les autres rangés dans une pile. Il y a une carte accrochée sur le mur.<br/>Vous retrouvez notamment le fameux lexique dont on vous a tant parlé.<br/>Il va falloir faire un peu de ménage, afin de vous installer !",'Chambre de Bonavar',31, 'chambre de Bonavar');
-links('30;34;92')
+readJS('C','1 1','',"C'est la chambre que vous occuperez. <br/>Bonavar dessinait beaucoup, quelques-uns de ses dessins sont exposés sur des étagères, les autres rangés dans une pile. Il y a une carte accrochée sur le mur.<br/>Vous retrouvez notamment le fameux lexique dont on vous a tant parlé.<br/>Il va falloir faire un peu de ménage, afin de vous installer !",'Chambre de Bonavar',31, 'chambre de Bonavar', 32);
+links('30;34;92');

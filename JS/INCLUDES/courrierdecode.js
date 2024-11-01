@@ -1,2 +1,2 @@
-readJS('C','','',"Bien entendu, je connais le code ! <br/>Voilà en résumé ce que m'écrivait Bonavar : un matin, en se réveillant, il a découvert un petit carnet noir rempli de poèmes à propos de paysages étranges. Plus il les lisait, et plus il se souvenait de ses rêves, et des voyages qu'il y réalisait dans l'Outre-Monde. <br/>A force d'errer, il a découvert un lac étrange, aux eaux noires...",'Moi',146, 'courrier décodé');
-links('147')
+readJS('C','','',"Bien entendu, je connais le code ! <br/>Voilà en résumé ce que m'écrivait Bonavar : un matin, en se réveillant, il a découvert un petit carnet noir rempli de poèmes à propos de paysages étranges. Plus il les lisait, et plus il se souvenait de ses rêves, et des voyages qu'il y réalisait dans l'Outre-Monde. <br/>A force d'errer, il a découvert un lac étrange, aux eaux noires...",'Moi',146, 'courrier décodé', 147);
+links('147');

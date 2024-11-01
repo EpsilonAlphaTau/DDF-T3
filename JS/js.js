@@ -381,23 +381,16 @@ function decodeCodedScript(beacon, code){
 
 	for(var i =0;i<code.length; i++) {
 		var c = code.charAt(i);
-		//console.info("c>>" + c);
 		if (c < 10){
 			c -= beacon.charAt(i);
-			//console.info("c1>>" + c);
 		} else {
-			//console.info("c2>>" + c);
 			c = c.charCodeAt(0) - beacon.charAt(i) - 87;
-			//console.info("c>>" + c);
 			if (c < 0 || c >= 26)
 			{
 				c -= 75;
-				//console.info("c2>>" + c);
 			}	
-			//console.info("c2>>" + c);
 		}
 		s += String.fromCharCode(97 + c);
-		//console.info(">>" + s);
 	}
 	return s;
 }
@@ -428,19 +421,16 @@ function capitalizeFirstLetter(val) {
 var found = Array(shortcutsCount).fill(false);
 found[0] = true;
 
-var foundPredNum = -1;
-var isInInfo = false;
 
-
-function readJS(type, date, image, texte, medium, numero, recherche){
+function readJS(type, date, image, texte, medium, numero, recherche, ordre){
 	var diva = document.getElementById("divA");
 	var divb = document.getElementById("divB");
 	diva.innerHTML = "";
 	divb.innerHTML = "";
-	console.info("numero" + numero);
+	//console.info("numero" + numero);
 	var nouveau = (found[numero] === false);
 	found[numero] = true;
-	document.getElementById("Bnumero").value = numero;
+	document.getElementById("Bnumero").value = ordre;
 	if (nouveau)
 	{
 		GetCode();
@@ -450,11 +440,12 @@ function readJS(type, date, image, texte, medium, numero, recherche){
 		document.getElementById("Bnumero").style.backgroundColor = 'buttonface';
 	if (numero === 0)
     	document.getElementById("Bnumero").value="?";
-	foundPredNum = numero;
-	isInInfo = false;
 	fileClueIndice++;
 	fileClue[fileClueIndice] = numero;
+
 	currentClue = numero;
+	currentClueOrdre = ordre;
+	//	console.info(currentClue + "/" + currentClueOrdre+ "/" + recherche);
 	
 	diva.innerHTML += "<u>" + setOnClicks(capitalizeFirstLetter(recherche)) + "</u><br/><br/>";
 
@@ -482,7 +473,7 @@ function links(list){
 	var split = list.split(";");
 	var fini = true;
 	for(var i =0; i < split.length; i++) {
-		console.info(i + "=>" + found[split[i]]);
+		console.info(split[i] + "=>" + found[split[i]]);
 		if (!found[split[i]])
 			fini = false;
 	}
@@ -544,19 +535,14 @@ function addSpanContent(texte){
 }
 
 var currentClue = 0;
-function predClue() {
-	if (isInInfo) {
-		currentClue = foundPredNum;
-		shortcut(foundPredNum);
-		return;
-	}
+function predClueOld() {
 	do {
 		currentClue--;
 		if (currentClue == -1) currentClue = found.length - 1;
 	} while (!found[currentClue]);
 	shortcut(currentClue);
 }
-function nextClue() {
+function nextClueOld() {
 	do {
 		currentClue++;
 		if (currentClue == found.length) currentClue = 0;
@@ -564,13 +550,29 @@ function nextClue() {
 	shortcut(currentClue);
 }
 
+var currentClueOrdre = 0;
+function predClue() {
+	do {
+		currentClueOrdre--;
+		if (currentClueOrdre == -1) currentClueOrdre = listNumeros.length - 1;
+	} while (!found[listNumeros[currentClueOrdre]]);
+	shortcut(listNumeros[currentClueOrdre]);
+}
+function nextClue() {
+	do {
+		currentClueOrdre++;
+		if (currentClueOrdre == listNumeros.length) currentClueOrdre = 0;
+	} while (!found[listNumeros[currentClueOrdre]]);
+	shortcut(listNumeros[currentClueOrdre]);
+}
+
 var fileClue = [];
 fileClue[0] = 0;
 var fileClueIndice = 0;
 function retour(){
 	if (fileClueIndice === 0) return;
-	console.log(fileClue);
-	console.info(fileClueIndice);
+	//console.log(fileClue);
+	//console.info(fileClueIndice);
 	fileClueIndice--;
 	while (fileClue[fileClueIndice] == -1)
 		fileClueIndice --;
@@ -674,13 +676,8 @@ function getCookieName(nom) {
 }
 
 function doTest(){
-	console.info("TESTING !")
-	var longText = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/";
-	longText = longText + longText + longText + longText + longText + longText + longText + longText;
-	setCookieName(longText, 'resume');
-	alert(getCookieName('resume'));
+	
 }
-
 
 function GetDecode(code){
 	console.log(code);
@@ -713,7 +710,7 @@ function GetDecode(code){
 		}
 		elt++;
 	}
-	//console.log(found);
+	console.log(found);
 	/*var beacon = GetDeLetter(code.charAt(code.length - 1));
 	if (beacon != nbTrue%30) {
 		alert("Code invalide");

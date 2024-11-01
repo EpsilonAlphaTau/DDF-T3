@@ -1,2 +1,2 @@
-readJS('C','1 1','',"Le cuisinier avoue rapidement. Né dans le Péléma, il a voyagé jusqu'à Luciandath, comme d'autres auparavant, car la tour est au centre de l'Oslande, beaucoup de savoir s'y trouve et beaucoup de choses s'y décident. <br/><i><br/>Utilisez 'aveux Jorda' pour qu'il parle de différents sujets à résoudre<br/></i>",'Aveux de Jorda',236, 'Jorda aveu');
-links('237;238;239;240;241;242;243;2444;245')
+readJS('C','1 1','',"Le cuisinier avoue rapidement. Né dans le Péléma, il a voyagé jusqu'à Luciandath, comme d'autres auparavant, car la tour est au centre de l'Oslande, beaucoup de savoir s'y trouve et beaucoup de choses s'y décident. <br/><i><br/>Utilisez 'aveux Jorda' pour qu'il parle de différents sujets à résoudre<br/></i>",'Aveux de Jorda',236, 'Jorda aveu', 236);
+links('237;238;239;240;241;242;243;2444;245');
