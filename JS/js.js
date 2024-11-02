@@ -382,19 +382,20 @@ function includeScript(pathArray){
 	var script = document.createElement('script');
 	script.src = '../JS/INCLUDES/' + pathArray[0] + '.js';
 
-	if (lastscript !== null) document.body.removeChild(lastscript);
-	console.log(pathArray);
-	lastscript = script;
-	try {
-		document.body.appendChild(script);
-	} catch (error) {
-		script = document.createElement('script');
+	// Écouter l'événement 'error'
+	script.onerror = function() {
+	    script = document.createElement('script');
 		script.src = '../JS/INCLUDES/' + pathArray[1] + '.js';
 		lastscript = script;
 		document.body.appendChild(script);
 		document.getElementById('medias').value = 0;
-	}
-	
+	};
+
+
+	if (lastscript !== null) document.body.removeChild(lastscript);
+	lastscript = script;
+	document.body.appendChild(script);
+
 	window.scrollTo(0, 0);
 }
 
@@ -488,7 +489,7 @@ function readJS(type, date, image, texte, mediumId, numero, recherche, ordre){
 	var medium = getMediaById(mediumId);
 	//console.log(medium);
 	if (medium.nom !== "")
-		diva.innerHTML += "<i><b>SOURCE : " + setOnClicks(medium.nom) + "</b></i><br/>";
+		diva.innerHTML += "<i><b>SOURCE : " + setOnClicks(setAccents(medium.nom)) + "</b></i><br/>";
 
 	if (date !== "" && date !== "1 1") {
 		diva.innerHTML += "<i><b>DATE : " + saison(date.charAt(0), date.substring(1)) + "</b></i><br/>";
