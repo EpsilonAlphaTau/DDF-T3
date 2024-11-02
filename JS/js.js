@@ -384,10 +384,11 @@ function includeScript(pathArray){
 
 	// Écouter l'événement 'error'
 	script.onerror = function() {
-	    script = document.createElement('script');
-		script.src = '../JS/INCLUDES/' + pathArray[1] + '.js';
-		lastscript = script;
-		document.body.appendChild(script);
+	    var scr = document.createElement('script');
+		scr.src = '../JS/INCLUDES/' + pathArray[1] + '.js';
+		console.info("ALT");
+		lastscript = scr;
+		document.body.appendChild(scr);
 		document.getElementById('medias').value = 0;
 	};
 
