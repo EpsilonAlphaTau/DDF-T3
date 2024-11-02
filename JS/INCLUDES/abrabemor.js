@@ -1,2 +1,2 @@
-readJS('I','','',"C'est une cité disparue, où se trouvaient des mines...",'Moi',155, 'Abrabémor', 156);
+readJS('C','','',"C'est une cité disparue, où se trouvaient des mines...",'1',155, 'Abrabémor', 169);
 links('');

@@ -9,6 +9,7 @@ function enterPassword(recherche){
 	document.getElementById("textB").value = "";
 }
 
+var recherchesEffectuees = [];
 function requete(){
 	var recherche = document.getElementById("textB").value;
 	//console.info("<<< " + recherche);
@@ -29,11 +30,13 @@ function requete(){
 		document.getElementById("textB").value = "";
 		return;
 	}
-	recherche = getFileNameFromText(recherche);
+	recherchesEffectuees.push(recherche);
+
+	var values = getFileNameFromText(recherche);
 	//console.info(">>> " + recherche);
-	if (recherche === "") {
+	if (values[0] === "") {
     	var text = getFileNameFromText(clearTextFromShorts(getSelectedText()));
-    	if (text !== "") {
+    	if (text[0] !== "" || text[1] !== "") {
     		includeScript(text);
     		document.getElementById("textB").value = "";
     		return;
@@ -47,12 +50,12 @@ function requete(){
 	}
 	
 	//console.info(doEncCheat(recherche));
-	if (recherche === doDecCheat("U2FsdGVkX19wKQnGwvRJYeY712DsrV8p767JWJsqe2MvNe56f/9UBoVAcBm/WdjT")) 
+	if (values[0] === doDecCheat("U2FsdGVkX19wKQnGwvRJYeY712DsrV8p767JWJsqe2MvNe56f/9UBoVAcBm/WdjT")) 
 	{ window.location = doDecCheat("U2FsdGVkX1/NlOv0aJbNsHJFUTPCEtHhkZWl9ewxHnpMh3FXsB0Gw5SLJJzBaDCv"); }
-	else if (recherche === doDecCheat("")) 
+	else if (values[0] === doDecCheat("")) 
 	{ window.location = doDecCheat("U2FsdGVkX19wH480savj7PZWBnPfJvj58B0e3l9+G6c="); }
 	else {
-		includeScript(recherche);
+		includeScript(values);
 	}
 	document.getElementById("textB").value = "";
 }
@@ -68,7 +71,7 @@ function getSelectedText() {
 
     //var selectedRange = selection.getRangeAt(0);
 
-    console.log(selection.toString());
+    //console.log(selection.toString());
     return selection.toString();
 }
 
@@ -163,7 +166,6 @@ function Decrypt(s)
 function doGetCodeFor(item)
 {
 	var encrypted = doEncCheat(item);
-	console.log("case '" + item + "': break;//" + encrypted.toString());
 	return encrypted.toString();
 }
 
@@ -295,13 +297,13 @@ function openInNewTab(url) {
 	switch(url){
 		case 25:window.open('https://www.youtube.com/watch?v=Iv0N5HSz6FA', '_blank');
 		case 26:window.open('https://www.youtube.com/watch?v=FmdgYSYimR4', '_blank');
-		case 27:window.open('../IMAGES/miroir.jpg', '_blank');
+		case 27:window.open('https://www.youtube.com/watch?v=ITgjkpCTj2g', '_blank');
 		case 28:window.open('https://www.youtube.com/watch?v=c8V5lNVXNgw', '_blank');
 		case 29:window.open('https://www.youtube.com/watch?v=MuPEZ9fyijc', '_blank');
-		case 30:window.open('https://www.youtube.com/watch?v=6OenzW3ODsI', '_blank');
+		case 30:window.open('https://www.youtube.com/watch?v=yKpPXGb1-w0', '_blank');
 		case 31:window.open('https://www.youtube.com/watch?v=wCa58dgpdaQ', '_blank');
 		case 32:window.open('../IMAGES/cochon.png', '_blank');
-		case 33:window.open('https://theflatearthsociety.org/home/index.php', '_blank');
+		case 33:window.open('https://www.youtube.com/watch?v=8LWBMiXSghU', '_blank');
 	}
   	
 }
@@ -318,13 +320,33 @@ function normalize(text) {
 	return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\W/g, '')/*.replaceAll("[^A-Za-z0-9]", "")*/;//.replace(/\s+/g, '')
 }
 
+function getMediaById(mediumId) {
+	for(var j=0; j<listMedias.length; j++) {
+		if ("" + listMedias[j].id === "" + mediumId) {
+			return listMedias[j];
+		}
+	}
+	return listMedias[0];
+}
+
 function getFileNameFromText(text){
+	var values = [];
+	var mediumId = document.getElementById("medias").value;
+
 	var split = text.trim().split(" ");
 	for(var i = 0; i < split.length; i++) {
 		split[i] = normalize(split[i]);
 	}
 	split.sort();
-	return split.join('');
+	values[1] = split.join('');
+	if (mediumId !== "") {
+		var medium = getMediaById(mediumId);
+		if (medium.code !== "")
+			split.push(medium.code);
+	}
+	split.sort();
+	values[0] = split.join('');
+	return values;
 }
 function startGame() {
 	document.getElementById("Bnext").style.display="inline-block";
@@ -355,23 +377,32 @@ function addSelected() {
 }
 
 var lastscript = null;
-function includeEncScript(path){
-	includeScript(doDecCheat(path));
-}
-function includeScript(path){
+
+function includeScript(pathArray){
 	var script = document.createElement('script');
-	script.src = '../JS/INCLUDES/' + path + '.js';
-	//console.info(script.src);
+	script.src = '../JS/INCLUDES/' + pathArray[0] + '.js';
+
 	if (lastscript !== null) document.body.removeChild(lastscript);
+	console.log(pathArray);
 	lastscript = script;
-	document.body.appendChild(script);
+	try {
+		document.body.appendChild(script);
+	} catch (error) {
+		script = document.createElement('script');
+		script.src = '../JS/INCLUDES/' + pathArray[1] + '.js';
+		lastscript = script;
+		document.body.appendChild(script);
+		document.getElementById('medias').value = 0;
+	}
+	
 	window.scrollTo(0, 0);
 }
 
 
 function includeCodedScript(code) {
 	var beacon = doDecCheat("U2FsdGVkX1+y0/9aFfuJF7WMok6/CWk8QFck+VviHEJd99Sa0FqR0eDeHtJr88TLZ61+eJVemcOc6R5Mh1HUYA/SB4U44GzwhGByGYBDPO0=");
-	var s = decodeCodedScript(beacon, code);
+	var s = [];
+	s[0] = s[1] = decodeCodedScript(beacon, code);
 	includeScript(s);
 	//console.info(s);
 }
@@ -422,11 +453,16 @@ var found = Array(shortcutsCount).fill(false);
 found[0] = true;
 
 
-function readJS(type, date, image, texte, medium, numero, recherche, ordre){
+
+function readJS(type, date, image, texte, mediumId, numero, recherche, ordre){
 	var diva = document.getElementById("divA");
 	var divb = document.getElementById("divB");
 	diva.innerHTML = "";
 	divb.innerHTML = "";
+
+	if (type === "D") {
+		debloquerMedium(mediumId);
+	}
 	//console.info("numero" + numero);
 	var nouveau = (found[numero] === false);
 	found[numero] = true;
@@ -449,8 +485,10 @@ function readJS(type, date, image, texte, medium, numero, recherche, ordre){
 	
 	diva.innerHTML += "<u>" + setOnClicks(capitalizeFirstLetter(recherche)) + "</u><br/><br/>";
 
-	if (medium !== "")
-		diva.innerHTML += "<i><b>SOURCE : " + setOnClicks(medium) + "</b></i><br/>";
+	var medium = getMediaById(mediumId);
+	//console.log(medium);
+	if (medium.nom !== "")
+		diva.innerHTML += "<i><b>SOURCE : " + setOnClicks(medium.nom) + "</b></i><br/>";
 
 	if (date !== "" && date !== "1 1") {
 		diva.innerHTML += "<i><b>DATE : " + saison(date.charAt(0), date.substring(1)) + "</b></i><br/>";
@@ -473,7 +511,7 @@ function links(list){
 	var split = list.split(";");
 	var fini = true;
 	for(var i =0; i < split.length; i++) {
-		console.info(split[i] + "=>" + found[split[i]]);
+		//console.info(split[i] + "=>" + found[split[i]]);
 		if (!found[split[i]])
 			fini = false;
 	}
@@ -521,7 +559,7 @@ function doOnClicks(texte){
 function aCompleter(texte){
 	var diva = document.getElementById("divA");
 	var divb = document.getElementById("divB");
-	diva.innerHTML = "</br>'" + texte + "' doit être combiné avec un ou plusieurs autres mots...";
+	diva.innerHTML = "</br>'" + texte + "' doit être combiné avec un ou plusieurs autres mots, ou cherché dans un endroit spécifique...";
 	divb.innerHTML = "";
 	document.getElementById("Bnumero").style.backgroundColor = 'buttonface';
 	document.getElementById("Bnumero").value = '?';
@@ -594,6 +632,14 @@ function hints(){
 	+ "Jusqu'où cela peut-il mener ? L'aventure se termine à l'indice "+ lastClue +".<br/><br/>"	
 	+ "<div align='center'>Code de sauvegarde à chercher<br/><br/><b>!" + code + "</b><br/><br/> (copié dans le presse papier et les cookies)</div>");
 	navigator.clipboard.writeText("!"+code);
+	document.getElementById("divB").innerHTML += "<br/><br/>Ce jeu accompagne la parution du <a target='_blank' href='https://www.amazon.fr/Dernier-Fa%C3%A7onneurs-Sillages-Adverses/dp/B0CNYLL5B8/ref=sr_1_1?crid=1C8WZB4HWPCLJ&dib=eyJ2IjoiMSJ9.LZMAXUhflFuHzftk2TjZ0DqbMITO5tUSar4HwpIWMrs.OEj8knmhW9rswlO5vtTcMENqlumawAVHT_ni5oCFw_A&dib_tag=se&keywords=dernier+fa%C3%A7onneurs&qid=1730488003&sprefix=%2Caps%2C76&sr=8-1'>Dernier des Façonneurs</a>, tome III."
+
+	document.getElementById("divB").innerHTML += "<br/><br/>Pour cette session voici vos recherches : <br/><br/>";
+	for(var i =0; i < recherchesEffectuees.length; i++) {
+		if (recherchesEffectuees[i] != "")
+			document.getElementById("divB").innerHTML += recherchesEffectuees[i] + "<br/>";
+	}
+	
 }
 
 //var test = GetCode();
@@ -680,7 +726,7 @@ function doTest(){
 }
 
 function GetDecode(code){
-	console.log(code);
+	//console.log(code);
 	var rand = code.charAt(0);
 	code = code.substring(1);
 	var crypt = GetCrypt(rand);
@@ -710,7 +756,23 @@ function GetDecode(code){
 		}
 		elt++;
 	}
-	console.log(found);
+	//console.log(found);
+	document.getElementById("medias").innerHTML = "<option value='0'>Nulle part en particulier</option>";
+
+	for(var j=0; j<listMedias.length; j++) {
+		var split = listMedias[j].deb.split(";");
+		for(var i=0; i < split.length; i++) {
+			if (found[parseInt(split[i])]) 
+			{
+				addMedium(listMedias[j]);
+				break;
+			}	
+		}
+	}
+
+	//console.log(listMedias);
+
+
 	/*var beacon = GetDeLetter(code.charAt(code.length - 1));
 	if (beacon != nbTrue%30) {
 		alert("Code invalide");
@@ -718,6 +780,29 @@ function GetDecode(code){
 	}*/
 	//console.log(found);
 }
+		
+
+function addMedium(medium){
+	medium.found = true;
+	if (medium.code !== ""){
+		document.getElementById("medias").innerHTML += "<option value='"+medium.id+"'>" + medium.nom + "</option>";
+		if (document.getElementById('medias').options.length > 1)
+			document.getElementById('medias').style.display = "inline-block";
+	}
+}
+
+function debloquerMedium(mediumId){
+	for(var j=0; j<listMedias.length; j++) {
+		if (""+listMedias[j].id === mediumId) {
+			if (listMedias[j].found === false){
+				addMedium(listMedias[j]);
+				document.getElementById('medias').value=mediumId;
+			}
+			return;
+		}
+	}
+}
+
 
 function GetLetter(b) {
 	if (b < 10) return "" + b;

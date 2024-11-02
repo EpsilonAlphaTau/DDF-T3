@@ -1,2 +1,2 @@
-readJS('C','','',"Pour quoi faire ?",'Chambre du jardinier',209, 'armoire jardinier outil', 210);
+readJS('C','','',"Pour quoi faire ?",'Chambre du jardinier',209, 'armoire jardinier outil', 224);
 links('');

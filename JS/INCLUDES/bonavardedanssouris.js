@@ -1,2 +1,2 @@
-readJS('I','','',"Non, je ne vais pas ouvrir cette souris, c'est dégoûtant...",'Chambre de Bonavar',104, ' souris dedans Bonavar', 105);
+readJS('I','','',"Non, je ne vais pas ouvrir cette souris, c'est dégoûtant...",'Chambre de Bonavar',104, ' souris dedans Bonavar', 116);
 links('');

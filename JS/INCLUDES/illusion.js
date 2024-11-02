@@ -1,2 +1,2 @@
-readJS('I','','',"Cela fait bien longtemps qu'aucun illusionniste n'habite à Luciandath...",'Bruits de couloir',86, 'illusionniste', 87);
+readJS('C','','',"Cela fait bien longtemps qu'aucun illusionniste n'habite à Luciandath...",'2',86, 'illusionniste', 98);
 links('');

@@ -1,2 +1,2 @@
-readJS('I','','',"Un passage secret ?",'Moi',211, 'passage secret', 212);
+readJS('C','','',"Un passage secret ?",'1',211, 'passage secret', 226);
 links('');

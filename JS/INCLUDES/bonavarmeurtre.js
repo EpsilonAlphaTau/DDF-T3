@@ -1,2 +1,2 @@
-readJS('I','2 4','',"<i>J'ai tant de regrets...<br/>On m'observe. On fouille mes affaires. <br/>Je ne peux laisser que des bribes d'indices. Les partisans de Lheitavar sont parmi nous, et ils préparent quelque chose...</i>",'Lexique de Bonavar',59, 'meurtre Bonavar', 60);
+readJS('C','','',"Rien n'indique que Bonavar ait été assassiné. Il a disparu, tout simplement. Est-il toujours ici ? Vit-il dans la forêt ?",'2',263, 'meurtre bonavar', 9);
 links('');

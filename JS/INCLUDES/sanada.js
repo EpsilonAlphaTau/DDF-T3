@@ -1,1 +1,2 @@
-aCompleter('sanada');
+readJS('D','','MonCarnet.png',"Mon carnet...<br/>Lorsque vous l'avez découvert, il était vide. <br/>La nuit suivante, vous avez rêvé de cette fillette étrange...<br/>Le lendemain, un poème était écrit à la première page :<br/><i><br/>Qui puis-je croire ? A qui faire confiance ? <br/>Tous finissent pas se défier de moi,<br/>Me trahir et détourner leurs pas. <br/>Je suis celle qu'on chasse, l'araignée,<br/>Je suis celle qu'on méprise, l'araignée.<br/></i><br/><br/>Quelque chose claque dans votre tête... Vous ne vous sentez pas très bien... Pourvu que la folie ne vous prenne pas !<br/><br/><i>Indiquez 'Mon carnet' pour chercher dedans</i>",'12',172, 'Mon carnet', 187);
+links('');
