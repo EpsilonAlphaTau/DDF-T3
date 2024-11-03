@@ -1,2 +1,2 @@
-readJS('C','','',"Mais ! Pas question !",'1',212, 'tuer araignée', 227);
+readJS('C','','',"Mais ! Pas question !",'1',212, 'Tuer araignée', 228);
 links('');

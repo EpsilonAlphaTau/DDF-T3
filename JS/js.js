@@ -55,7 +55,8 @@ function requete(){
 	else if (values[0] === doDecCheat("")) 
 	{ window.location = doDecCheat("U2FsdGVkX19wH480savj7PZWBnPfJvj58B0e3l9+G6c="); }
 	else {
-		includeScript(values);
+		if (gameStarted)
+			includeScript(values);
 	}
 	document.getElementById("textB").value = "";
 }
@@ -348,11 +349,14 @@ function getFileNameFromText(text){
 	values[0] = split.join('');
 	return values;
 }
+
+var gameStarted = false;
 function startGame() {
 	document.getElementById("Bnext").style.display="inline-block";
     document.getElementById("Bpred").style.display="inline-block";
     document.getElementById("Bnumero").style.display="inline-block";
     document.getElementById("Bretour").style.display="inline-block";
+    gameStarted = true;
 }
 function clearTextFromShorts(sel){
 	sel = sel.trim();
@@ -624,6 +628,7 @@ function retour(){
 
 function hints(){
 	var code = GetCode();
+	document.getElementById("requetes").value = "";
 	document.getElementById("divA").innerHTML = "";
 	document.getElementById("divB").innerHTML = setAccents("Faites des recherches. L'ordre des mots ne compte pas, ni les accents. Il vaut mieux éviter les petits mots de liaison ('aller lac' plutôt que 'aller jusqu'au lac').<br/><br/>"
 	+ "Vous pouvez utiliser des prénoms ou des lieux pour spécifier la recherche.<br/><br/>"
@@ -632,9 +637,9 @@ function hints(){
 	+ "Si une piste ne mène plus nulle part, c'est peut-être qu'une autre est à suivre en parallèle.<br/><br/>"
 	+ "Quand toutes les pistes importantes ont été trouvées depuis un indice, les petits points disparaissent après 'Cherchez...'.<br/><br/>"
 	+ "Jusqu'où cela peut-il mener ? L'aventure se termine à l'indice "+ lastClue +".<br/><br/>"	
-	+ "<div align='center'>Code de sauvegarde à chercher<br/><br/><b>!" + code + "</b><br/><br/> (copié dans le presse papier et les cookies)</div>");
+	+ "<div align='center' style='border: solid;border-radius: 5px;padding: 5px;'>Code de sauvegarde à chercher<br/><br/><b style='font-size: 12px;'>!" + code + "</b><br/><br/> (copié dans le presse papier et les cookies)</div>");
 	navigator.clipboard.writeText("!"+code);
-	document.getElementById("divB").innerHTML += "<br/><br/>Ce jeu accompagne la parution du <a target='_blank' href='https://www.amazon.fr/Dernier-Fa%C3%A7onneurs-Sillages-Adverses/dp/B0CNYLL5B8/ref=sr_1_1?crid=1C8WZB4HWPCLJ&dib=eyJ2IjoiMSJ9.LZMAXUhflFuHzftk2TjZ0DqbMITO5tUSar4HwpIWMrs.OEj8knmhW9rswlO5vtTcMENqlumawAVHT_ni5oCFw_A&dib_tag=se&keywords=dernier+fa%C3%A7onneurs&qid=1730488003&sprefix=%2Caps%2C76&sr=8-1'>Dernier des Façonneurs</a>, tome III."
+	document.getElementById("divB").innerHTML += "<br/><div align='center'>Ce jeu accompagne la parution du <br/><a target='_blank' href='https://www.amazon.fr/Dernier-Fa%C3%A7onneurs-Sillages-Adverses/dp/B0CNYLL5B8/ref=sr_1_1?crid=1C8WZB4HWPCLJ&dib=eyJ2IjoiMSJ9.LZMAXUhflFuHzftk2TjZ0DqbMITO5tUSar4HwpIWMrs.OEj8knmhW9rswlO5vtTcMENqlumawAVHT_ni5oCFw_A&dib_tag=se&keywords=dernier+fa%C3%A7onneurs&qid=1730488003&sprefix=%2Caps%2C76&sr=8-1'>Dernier des Façonneurs</a>, tome III.</div>"
 
 	document.getElementById("divB").innerHTML += "<br/><br/>Pour cette session voici vos recherches : <br/><br/>";
 	for(var i =0; i < recherchesEffectuees.length; i++) {

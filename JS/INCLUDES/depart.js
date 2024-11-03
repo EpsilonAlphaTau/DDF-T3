@@ -1,2 +1,1 @@
-readJS('C','1 1','',"Après un long voyage, vous arrivez enfin à Luciandath, au centre de l'Oslande.<br/><br/>L’année précédente, vous aviez reçu une lettre de leur part, indiquant qu’ils disposaient déjà d’assez d'ouvriers pour l'entretien des livres et que votre candidature ne trouvait pas un accueil favorable. <br/><br/>Puis, au milieu de l’hiver, une nouvelle lettre est arrivée : l’ancien archiviste avait cédé sa place. Elle vous était offerte. Archiviste de Luciandath ! Archiviste de Luciandath ? <br/><br/>Sans réfléchir, vous avez préparé vos affaires et embarqué dans le premier convoi en direction de la tour.",'0',0, 'départ', 0);
-links('22;29');
+aCompleter('depart');

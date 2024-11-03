@@ -1,2 +1,1 @@
-readJS('C','2 104','',"<i>A l'occasion d'une nouvelle insomnie, et d'une chaleur suffocante, j'ai passé ma nuit le nez à la fenêtre. Par hasard, au loin, j'ai aperçu une lumière dans l'obscurité des bois. Quelqu'un allumait un flambeau. D'autres s'éclairèrent, puis s'éloignèrent. Des habitants de Luciandath voyageaient de nuit.<br/>Je n'avais pas connaissance de telles pratiques. Où allaient-ils ?</i>",'6',54, 'feu', 63);
-links('');
+aCompleter('feu');
