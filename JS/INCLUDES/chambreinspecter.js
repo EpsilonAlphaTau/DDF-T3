@@ -1,0 +1,1 @@
+aCompleter('inspecter chambre');

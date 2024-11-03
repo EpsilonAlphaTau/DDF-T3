@@ -35,17 +35,18 @@ function requete(){
 	var values = getFileNameFromText(recherche);
 	//console.info(">>> " + recherche);
 	if (values[0] === "") {
-    	var text = getFileNameFromText(clearTextFromShorts(getSelectedText()));
+    	/*var text = getFileNameFromText(clearTextFromShorts(getSelectedText()));
     	if (text[0] !== "" || text[1] !== "") {
     		includeScript(text);
     		document.getElementById("textB").value = "";
     		return;
-    	}
-
-       	startGame();
-		shortcut(0);
-    	document.getElementById("Bnumero").value="?";
-		document.getElementById("textB").value = "";
+    	}*/
+		if (!gameStarted) {
+			startGame();
+			shortcut(0);
+	    	document.getElementById("Bnumero").value="?";
+			document.getElementById("textB").value = "";
+		}
 		return;
 	}
 	
@@ -393,7 +394,9 @@ function includeScript(pathArray){
 		console.info("ALT");
 		lastscript = scr;
 		document.body.appendChild(scr);
-		document.getElementById('medias').value = 0;
+		scr.onload = function() {
+    		document.getElementById('medias').value = 0;
+		};
 	};
 
 
@@ -576,6 +579,7 @@ function aCompleter(texte){
 
 function addSpanContent(texte){
 	document.getElementById("textB").value += texte + " ";
+	document.getElementById("textB").focus();
 }
 
 var currentClue = 0;
@@ -632,7 +636,6 @@ function hints(){
 	document.getElementById("divA").innerHTML = "";
 	document.getElementById("divB").innerHTML = setAccents("Faites des recherches. L'ordre des mots ne compte pas, ni les accents. Il vaut mieux éviter les petits mots de liaison ('aller lac' plutôt que 'aller jusqu'au lac').<br/><br/>"
 	+ "Vous pouvez utiliser des prénoms ou des lieux pour spécifier la recherche.<br/><br/>"
-	+ "Une recherche à vide cherche les mots sélectionnés.<br/><br/>"
 	+ "Cliquez sur les mots du texte pour les ajouter à la recherche.<br/><br/>"
 	+ "Si une piste ne mène plus nulle part, c'est peut-être qu'une autre est à suivre en parallèle.<br/><br/>"
 	+ "Quand toutes les pistes importantes ont été trouvées depuis un indice, les petits points disparaissent après 'Cherchez...'.<br/><br/>"
