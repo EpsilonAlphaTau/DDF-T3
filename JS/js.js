@@ -6,6 +6,7 @@ function enterPassword(recherche){
 	GetDecode(recherche.substring(1));
 	predClue();
 	startGame() ;
+	setCookie(code);
 	document.getElementById("textB").value = "";
 }
 
