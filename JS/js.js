@@ -9,7 +9,7 @@ function enterPassword(recherche){
 	setCookie(code);
 	document.getElementById("textB").value = "";
 }
-
+console.info(doEncCheat("9798300253875"));
 var recherchesEffectuees = [];
 function requete(){
 	var recherche = document.getElementById("textB").value;
@@ -54,7 +54,7 @@ function requete(){
 	//console.info(doEncCheat(recherche));
 	if (values[0] === doDecCheat("U2FsdGVkX19wKQnGwvRJYeY712DsrV8p767JWJsqe2MvNe56f/9UBoVAcBm/WdjT")) 
 	{ window.location = doDecCheat("U2FsdGVkX1/NlOv0aJbNsHJFUTPCEtHhkZWl9ewxHnpMh3FXsB0Gw5SLJJzBaDCv"); }
-	else if (values[0] === doDecCheat("")) 
+	else if (values[0] === doDecCheat("U2FsdGVkX1+6UoaNky+oKReh6S5Bt7SdCjnImatqOtI=")) 
 	{ window.location = doDecCheat("U2FsdGVkX19wH480savj7PZWBnPfJvj58B0e3l9+G6c="); }
 	else {
 		if (gameStarted)
